@@ -1,0 +1,19 @@
+rootProject.name = 'poleymo'
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+    }
+}
+
+include(
+        'module-common:core',
+        'module-common:web',
+        'module-common:security',
+        'module-auth',
+        'module-chat',
+        'module-community',
+        'module-market',
+        'module-student',
+)
