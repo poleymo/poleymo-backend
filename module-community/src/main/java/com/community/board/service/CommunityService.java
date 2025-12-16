@@ -24,7 +24,7 @@ public class CommunityService {
     }
 
     public List<Community> find(int page, int size) {
-        Sort sort = Sort.by("community_seq").descending();
+        Sort sort = Sort.by("communitySeq").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<Community> all = communityRepository.findAll(pageable);
@@ -34,7 +34,6 @@ public class CommunityService {
     public Community save(CommunityDto.Request dto) {
         CommunityTab tab = communityTabService.getTab(dto.getCommunityTabSeq());
 
-        System.out.println("CommunityService.save");
         Community community = Community.builder()
                 .communityTab(tab)
                 .title(dto.getTitle())
