@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("tabs")
+@RequestMapping("community/tabs")
 @RestController
 public class CommunityTabController {
 
