@@ -6,10 +6,6 @@ import jakarta.persistence.Id;
 
 public class MarketBoardDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int mbSeq; // 중고나라 게시글 키 (marketBoardSequence)
-
     /*
     게시글 작성자 키, 게시글 상태 키, 게시된 물품 상태 키는 각각
     User, BoardState, ProductState로 class를 생성하고, foreign key 설정을 해야한다.
