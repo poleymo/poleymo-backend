@@ -5,7 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.*;
 
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class MarketBoard {
 
@@ -31,59 +36,4 @@ public class MarketBoard {
     private boolean activated; // 중고나라 게시글 활성화 여부
     private int reported; // 중고나라 게시글 신고 횟수
 //    private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
-
-    public MarketBoard(int userSeq, int bsSeq, int psSeq, String title, int price, int view, int like, boolean activated, int reported) {
-        this.userSeq = userSeq;
-        this.bsSeq = bsSeq;
-        this.psSeq = psSeq;
-        this.title = title;
-        this.price = price;
-        this.view = view;
-        this.like = like;
-        this.activated = activated;
-        this.reported = reported;
-    }
-
-    public MarketBoard() {
-    }
-
-    public int getMbSeq() {
-        return mbSeq;
-    }
-
-    public int getuserSeq() {
-        return userSeq;
-    }
-
-    public int getbsSeq() {
-        return bsSeq;
-    }
-
-    public int getpsSeq() {
-        return psSeq;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getView() {
-        return view;
-    }
-
-    public int getLike() {
-        return like;
-    }
-
-    public boolean isactivated() {
-        return activated;
-    }
-
-    public int getReported() {
-        return reported;
-    }
 }
