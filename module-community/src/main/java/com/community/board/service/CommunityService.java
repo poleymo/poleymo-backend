@@ -11,11 +11,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class CommunityService {
+    private static final long INIT = 0;
     private final CommunityRepository communityRepository;
     private final CommunityTabService communityTabService;
 
@@ -23,12 +22,12 @@ public class CommunityService {
         return communityRepository.findById(communityId).orElseThrow(() -> new IllegalArgumentException(""));
     }
 
-    public List<Community> find(int page, int size) {
+    public Page<Community> find(Long boardType, int page, int size) {
+        //todo: 이 부분 파라미터로 받는거 고려
         Sort sort = Sort.by("communitySeq").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Community> all = communityRepository.findAll(pageable);
-        return all.getContent();
+        return communityRepository.findAllByCommunityTab_CommunityTabSeq(boardType, pageable);
     }
 
     public Community save(CommunityDto.Request dto) {
@@ -38,7 +37,7 @@ public class CommunityService {
                 .communityTab(tab)
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .recommend(0L)
+                .recommend(INIT)
                 .author(dto.getAuthor())
                 .build();
         return communityRepository.save(community);
