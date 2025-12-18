@@ -16,7 +16,7 @@ public class MarketBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int mbSeq; // 중고나라 게시글 키 (marketBoardSequence)
+    private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
 
 
     // 게시글 작성자 키, 게시글 상태 키, 게시된 물품 상태 키는 각각
