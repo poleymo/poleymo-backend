@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +31,7 @@ public class CommunityService {
         return communityRepository.findAllByCommunityTab_CommunityTabSeq(boardType, pageable);
     }
 
+    @Transactional
     public Community save(CommunityDto.Request dto) {
         CommunityTab tab = communityTabService.getTab(dto.getCommunityTabSeq());
 
@@ -39,7 +41,33 @@ public class CommunityService {
                 .content(dto.getContent())
                 .recommend(INIT)
                 .author(dto.getAuthor())
+                .visible(true)
                 .build();
         return communityRepository.save(community);
+    }
+
+    /**
+     * 일반적인 상황에서는 글 제목과 내용만 수정 가능하도록 제한</br>
+     * 탭 수정은 다른 메서드로 분리
+     * </br>
+     * 업데이트 권한이 있는지 검중 추가 필요
+     * */
+    @Transactional
+    public Community update(CommunityDto.Update dto) {
+        Community community = communityRepository.findById(dto.getCommunitySeq())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글"));
+
+        community.changeTitle(dto.getTitle());
+        community.changeContent(dto.getContent());
+        community.changeVisible(dto.getVisible());
+        return community;
+    }
+
+    /**
+     * 업데이트 권한이 있는지 검중 추가 필요
+     */
+    @Transactional
+    public void delete(CommunityDto.Delete dto) {
+        communityRepository.deleteById(dto.getCommunitySeq());
     }
 }

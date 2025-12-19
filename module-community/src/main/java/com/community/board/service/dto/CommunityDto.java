@@ -29,6 +29,31 @@ public class CommunityDto {
         private CommunityTabDto.Response communityTabSeq;
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class Update {
+        private Long communitySeq;
+        private String title;
+        private String content;
+        private Long recommend;
+        private String author;
+        private Boolean visible;
+        private CommunityTabDto.Response communityTabDto;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class Delete {
+        private Long communitySeq;
+        private String title;
+        private String content;
+        private Long recommend;
+        private String author;
+        private Boolean visible;
+    }
+
     public static CommunityDto.Response from(Community community) {
         return CommunityDto.Response.builder()
                 .communitySeq(community.getCommunitySeq())

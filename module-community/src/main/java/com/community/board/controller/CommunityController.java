@@ -5,6 +5,8 @@ import com.community.board.service.dto.CommunityDto;
 import com.community.board.service.entity.Community;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("community/boards")
@@ -27,8 +29,20 @@ public class CommunityController {
     }
 
     @PostMapping
-    public CommunityDto.Response saveCommunity(@RequestBody CommunityDto.Request communityDto) {
-        Community community = communityService.save(communityDto);
+    public CommunityDto.Response saveCommunity(@RequestBody CommunityDto.Request dto) {
+        Community community = communityService.save(dto);
         return CommunityDto.from(community);
+    }
+
+    @PatchMapping
+    public CommunityDto.Response updateCommunity(@RequestBody CommunityDto.Update dto) {
+        Community update = communityService.update(dto);
+        return CommunityDto.from(update);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<HttpStatus> deleteCommunity(@RequestBody CommunityDto.Delete dto) {
+        communityService.delete(dto);
+        return ResponseEntity.ok().body(HttpStatus.OK);
     }
 }
