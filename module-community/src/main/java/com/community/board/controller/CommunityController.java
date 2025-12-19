@@ -24,8 +24,7 @@ public class CommunityController {
 
     @GetMapping("list/{type}")
     public Page<CommunityDto.Response> getCommunityList(@PathVariable Long type, int page, int size) {
-        Page<Community> communities = communityService.find(type, page, size);
-        return communities.map(CommunityDto::from);
+        return communityService.find(type, page, size);
     }
 
     @PostMapping
