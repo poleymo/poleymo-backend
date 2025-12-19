@@ -1,10 +1,6 @@
 package com.market.board.service.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -23,7 +19,10 @@ public class MarketBoard {
     // User, BoardState, ProductState로 class를 생성하고, foreign key 설정을 해야한다.
 
     private int userSeq; // 중고나라 게시글 작성자 키
-    private int mbsSeq; // 중고나라 게시글 상태 키 (board_state_seq)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MarketBoardState marketBoardState;
+
     private int psSeq; // 게시된 물품 상태 키 (product_state_seq)
     private String title; // 중고나라 게시글 제목
     private int price; // 물품 가격
@@ -36,4 +35,8 @@ public class MarketBoard {
     private boolean activated; // 중고나라 게시글 활성화 여부
     private int reported; // 중고나라 게시글 신고 횟수
 //    private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
+
+    public int getMbsSeq() {
+        return marketBoardState.getMbsSeq();
+    }
 }

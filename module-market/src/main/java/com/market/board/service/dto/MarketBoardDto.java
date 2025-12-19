@@ -31,7 +31,7 @@ public class MarketBoardDto {
     @Builder
     @AllArgsConstructor
     public static class Response {
-        private int mbSeq; // 중고나라 게시글 키 (marketBoardSequence)
+        private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
         private int userSeq; // 중고나라 게시글 작성자 키
         private int mbsSeq; // 중고나라 게시글 상태 키 (board_state_seq)
         private int psSeq; // 게시된 물품 상태 키 (product_state_seq)
