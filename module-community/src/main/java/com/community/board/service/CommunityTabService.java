@@ -5,6 +5,7 @@ import com.community.board.service.entity.CommunityTab;
 import com.community.board.service.repository.CommunityTabRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class CommunityTabService {
      * 수정 권한 확인필요 </br>
      * 일반 회원권한 이상
      */
+    @Transactional
     public CommunityTab updateTab(CommunityTabDto.Update dto) {
         CommunityTab communityTab = communityTabRepository.findById(dto.getCommunityTabSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 탭"));
@@ -46,6 +48,7 @@ public class CommunityTabService {
      * 수정 권한 확인필요 </br>
      * 일반 회원권한 이상
      */
+    @Transactional
     public void deleteTab(CommunityTabDto.Delete dto) {
         communityTabRepository.deleteById(dto.getCommunityTabSeq());
     }
