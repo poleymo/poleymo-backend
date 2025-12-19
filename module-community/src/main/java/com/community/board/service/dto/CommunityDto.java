@@ -26,6 +26,7 @@ public class CommunityDto {
         private String content;
         private Long recommend;
         private String author;
+        private Boolean visible;
         private CommunityTabDto.Response communityTabSeq;
     }
 

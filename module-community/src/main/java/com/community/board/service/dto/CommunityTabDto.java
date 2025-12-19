@@ -20,6 +20,7 @@ public class CommunityTabDto {
     public static class Response {
         private Long communityTabSeq;
         private String tabName;
+        private Boolean visible;
     }
 
     @Getter
@@ -38,8 +39,6 @@ public class CommunityTabDto {
                 .tabName(communityTab.getTabName())
                 .build();
     }
-
-
 
     @Getter
     @Builder
