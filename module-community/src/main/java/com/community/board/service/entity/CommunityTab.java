@@ -19,4 +19,6 @@ public class CommunityTab extends BaseTimeEntity {
     private Long communityTabSeq;
 
     private String tabName;
+
+    private Boolean visible;
 }
