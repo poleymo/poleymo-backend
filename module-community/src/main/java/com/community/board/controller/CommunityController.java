@@ -2,9 +2,9 @@ package com.community.board.controller;
 
 import com.community.board.service.CommunityService;
 import com.community.board.service.dto.CommunityDto;
+import com.community.board.service.dto.PageResponse;
 import com.community.board.service.entity.Community;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +23,8 @@ public class CommunityController {
     }
 
     @GetMapping("list/{type}")
-    public Page<CommunityDto.Response> getCommunityList(@PathVariable Long type, int page, int size) {
-        return communityService.find(type, page, size);
+    public PageResponse<CommunityDto.Response> getCommunityList(@PathVariable Long type, int page, int size) {
+        return PageResponse.from(communityService.find(type, page, size));
     }
 
     @PostMapping
