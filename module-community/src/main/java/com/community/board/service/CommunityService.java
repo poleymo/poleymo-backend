@@ -23,12 +23,14 @@ public class CommunityService {
         return communityRepository.findById(communityId).orElseThrow(() -> new IllegalArgumentException(""));
     }
 
-    public Page<Community> find(Long boardType, int page, int size) {
+    @Transactional(readOnly = true)
+    public Page<CommunityDto.Response> find(Long boardType, int page, int size) {
         //todo: 이 부분 파라미터로 받는거 고려
         Sort sort = Sort.by("communitySeq").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        return communityRepository.findAllByCommunityTab_CommunityTabSeq(boardType, pageable);
+        Page<Community> communities = communityRepository.findAllByCommunityTab_CommunityTabSeq(boardType, pageable);
+        return communities.map(CommunityDto::from);
     }
 
     @Transactional
