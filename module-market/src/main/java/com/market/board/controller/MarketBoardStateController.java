@@ -22,12 +22,15 @@ public class MarketBoardStateController {
 
     @GetMapping("list")
     public List<MarketBoardStateDto.Response> getAllMarketBoardState() {
-        return marketBoardStateService.getAllBoard().stream()
+        return marketBoardStateService.getAllMarketBoardState().stream()
                 .map(this::toResponse)
                 .toList();
     }
 
-
+    @GetMapping
+    public MarketBoardStateDto.Response getMarketBoardState(int mbsSeq) {
+        return toResponse(marketBoardStateService.getMarketBoardState(mbsSeq));
+    }
 
     private MarketBoardStateDto.Response toResponse(MarketBoardState marketBoardState) {
         return MarketBoardStateDto.Response.builder()

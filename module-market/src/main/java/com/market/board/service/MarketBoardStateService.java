@@ -21,7 +21,12 @@ public class MarketBoardStateService {
         return marketBoardStateRepository.save(build);
     }
 
-    public List<MarketBoardState> getAllBoard() {
+    public MarketBoardState getMarketBoardState(int mbsSeq) {
+        return marketBoardStateRepository.findById(mbsSeq)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글 상태가 없습니다."));
+    }
+
+    public List<MarketBoardState> getAllMarketBoardState() {
         return marketBoardStateRepository.findAll();
     }
 }
