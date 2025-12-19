@@ -1,5 +1,6 @@
 package com.community.board.service.dto;
 
+import com.community.board.service.entity.Community;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +26,17 @@ public class CommunityDto {
         private String content;
         private Long recommend;
         private String author;
-        private Long communityTabSeq;
+        private CommunityTabDto.Response communityTabSeq;
+    }
+
+    public static CommunityDto.Response from(Community community) {
+        return CommunityDto.Response.builder()
+                .communitySeq(community.getCommunitySeq())
+                .communityTabSeq(CommunityTabDto.from(community.getCommunityTab()))
+                .title(community.getTitle())
+                .content(community.getContent())
+                .recommend(community.getRecommend())
+                .author(community.getAuthor())
+                .build();
     }
 }

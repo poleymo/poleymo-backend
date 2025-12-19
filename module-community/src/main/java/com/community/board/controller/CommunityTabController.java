@@ -18,20 +18,13 @@ public class CommunityTabController {
     @GetMapping
     public List<CommunityTabDto.Response> getAllTab() {
         return communityTabService.getAllTab().stream()
-                .map(this::toResponse)
+                .map(CommunityTabDto::from)
                 .toList();
     }
 
     @PostMapping
     public CommunityTabDto.Response saveTab(@RequestBody CommunityTabDto.Request tab) {
-        return toResponse(communityTabService.saveTab(tab));
-    }
-
-    private CommunityTabDto.Response toResponse(CommunityTab communityTab) {
-        return CommunityTabDto.Response
-                .builder()
-                .communityTabSeq(communityTab.getCommunityTabSeq())
-                .tabName(communityTab.getTabName())
-                .build();
+        CommunityTab communityTab = communityTabService.saveTab(tab);
+        return CommunityTabDto.from(communityTab);
     }
 }
