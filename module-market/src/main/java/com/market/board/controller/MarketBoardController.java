@@ -32,7 +32,7 @@ public class MarketBoardController {
         return MarketBoardDto.Response.builder()
                 .mbSeq(marketBoard.getMbSeq())
                 .userSeq(marketBoard.getUserSeq())
-                .bsSeq(marketBoard.getBsSeq())
+                .mbsSeq(marketBoard.getMbsSeq())
                 .psSeq(marketBoard.getPsSeq())
                 .title(marketBoard.getTitle())
                 .price(marketBoard.getPrice())
