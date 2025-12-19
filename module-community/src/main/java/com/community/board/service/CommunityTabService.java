@@ -28,4 +28,25 @@ public class CommunityTabService {
     public List<CommunityTab> getAllTab() {
         return communityTabRepository.findAll();
     }
+
+    /**
+     * 수정 권한 확인필요 </br>
+     * 일반 회원권한 이상
+     */
+    public CommunityTab updateTab(CommunityTabDto.Update dto) {
+        CommunityTab communityTab = communityTabRepository.findById(dto.getCommunityTabSeq())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 탭"));
+
+        communityTab.changeTabName(dto.getTabName());
+        communityTab.changeVisible(dto.getVisible());
+        return communityTab;
+    }
+
+    /**
+     * 수정 권한 확인필요 </br>
+     * 일반 회원권한 이상
+     */
+    public void deleteTab(CommunityTabDto.Delete dto) {
+        communityTabRepository.deleteById(dto.getCommunityTabSeq());
+    }
 }

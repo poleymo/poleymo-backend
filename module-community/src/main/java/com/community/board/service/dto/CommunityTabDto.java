@@ -22,11 +22,31 @@ public class CommunityTabDto {
         private String tabName;
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class Update {
+        private Long communityTabSeq;
+        private String tabName;
+        private Boolean visible;
+    }
+
     public static CommunityTabDto.Response from(CommunityTab communityTab) {
         return CommunityTabDto.Response
                 .builder()
                 .communityTabSeq(communityTab.getCommunityTabSeq())
                 .tabName(communityTab.getTabName())
                 .build();
+    }
+
+
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class Delete {
+        private Long communityTabSeq;
+        private String tabName;
+        private Boolean visible;
     }
 }
