@@ -53,16 +53,16 @@ public class CommunityService {
      * 탭 수정은 다른 메서드로 분리
      * </br>
      * 업데이트 권한이 있는지 검중 추가 필요
-     * */
+     */
     @Transactional
-    public Community update(CommunityDto.Update dto) {
+    public CommunityDto.Response update(CommunityDto.Update dto) {
         Community community = communityRepository.findById(dto.getCommunitySeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글"));
 
         community.changeTitle(dto.getTitle());
         community.changeContent(dto.getContent());
         community.changeVisible(dto.getVisible());
-        return community;
+        return CommunityDto.from(community);
     }
 
     /**
