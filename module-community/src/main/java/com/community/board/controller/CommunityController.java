@@ -4,9 +4,8 @@ import com.community.board.service.CommunityService;
 import com.community.board.service.dto.CommunityDto;
 import com.community.board.service.entity.Community;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping("community/boards")
 @RestController
@@ -20,11 +19,11 @@ public class CommunityController {
         return toResponse(communityService.find(communitySeq));
     }
 
-    @GetMapping("list")
-    public List<CommunityDto.Response> getCommunityList(int page, int size) {
-        List<Community> communities = communityService.find(page, size);
-        return communities.stream().map(this::toResponse)
-                .toList();
+    @GetMapping("list/{type}")
+    public Page<CommunityDto.Response> getCommunityList(@PathVariable Long type, int page, int size) {
+        Page<Community> communities = communityService.find(type, page, size);
+
+        return communities.map(this::toResponse);
     }
 
     @PostMapping
