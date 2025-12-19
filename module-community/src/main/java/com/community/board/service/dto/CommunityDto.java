@@ -63,6 +63,7 @@ public class CommunityDto {
                 .content(community.getContent())
                 .recommend(community.getRecommend())
                 .author(community.getAuthor())
+                .visible(community.getVisible())
                 .build();
     }
 }
