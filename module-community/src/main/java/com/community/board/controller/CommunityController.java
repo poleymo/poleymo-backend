@@ -16,29 +16,19 @@ public class CommunityController {
 
     @GetMapping
     public CommunityDto.Response getCommunity(Long communitySeq) {
-        return toResponse(communityService.find(communitySeq));
+        Community community = communityService.find(communitySeq);
+        return CommunityDto.from(community);
     }
 
     @GetMapping("list/{type}")
     public Page<CommunityDto.Response> getCommunityList(@PathVariable Long type, int page, int size) {
         Page<Community> communities = communityService.find(type, page, size);
-
-        return communities.map(this::toResponse);
+        return communities.map(CommunityDto::from);
     }
 
     @PostMapping
     public CommunityDto.Response saveCommunity(@RequestBody CommunityDto.Request communityDto) {
-        return toResponse(communityService.save(communityDto));
-    }
-
-    private CommunityDto.Response toResponse(Community community) {
-        return CommunityDto.Response.builder()
-                .communitySeq(community.getCommunitySeq())
-                .communityTabSeq(community.getCommunityTabSeq())
-                .title(community.getTitle())
-                .content(community.getContent())
-                .recommend(community.getRecommend())
-                .author(community.getAuthor())
-                .build();
+        Community community = communityService.save(communityDto);
+        return CommunityDto.from(community);
     }
 }
