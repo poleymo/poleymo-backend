@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.util.Objects;
+
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,4 +23,18 @@ public class CommunityTab extends BaseTimeEntity {
     private String tabName;
 
     private Boolean visible;
+
+    public void changeVisible(Boolean visible) {
+        if (Objects.equals(this.visible, visible)) {
+            return;
+        }
+        this.visible = visible;
+    }
+
+    public void changeTabName(String tabName) {
+        if (Objects.equals(this.tabName, tabName)) {
+            return;
+        }
+        this.tabName = tabName;
+    }
 }
