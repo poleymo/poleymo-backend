@@ -22,6 +22,8 @@ public class Community extends BaseTimeEntity {
 
     private String author;
 
+    private Boolean visible;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private CommunityTab communityTab;
 
