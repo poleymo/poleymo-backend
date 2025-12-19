@@ -35,8 +35,7 @@ public class CommunityController {
 
     @PatchMapping
     public CommunityDto.Response updateCommunity(@RequestBody CommunityDto.Update dto) {
-        Community update = communityService.update(dto);
-        return CommunityDto.from(update);
+        return communityService.update(dto);
     }
 
     @DeleteMapping
