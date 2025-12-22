@@ -42,6 +42,7 @@ public class MarketBoardDto {
         private boolean activated; // 중고나라 게시글 활성화 여부
         private int reported; // 중고나라 게시글 신고 횟수
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
+        private Boolean visible; // 게시글 조회 가능 여부
     }
 
 }
