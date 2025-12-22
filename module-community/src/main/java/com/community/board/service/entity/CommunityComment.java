@@ -27,6 +27,13 @@ public class CommunityComment extends BaseTimeEntity {
     private Boolean visible;
 
     private Long recommend;
+//클로저 테이블 변경 고려
+    public Long getParentSeq() {
+        if (parent == null) {
+            return null;
+        }
+        return parent.getCommentSeq();
+    }
 
     public void changeContent(String content) {
         this.content = content;
