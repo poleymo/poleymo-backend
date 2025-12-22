@@ -1,0 +1,32 @@
+package com.market.board.service;
+
+import com.market.board.dto.ProductStateDto;
+import com.market.board.entity.ProductState;
+import com.market.board.repository.ProductStateRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class ProductStateService {
+
+    private final ProductStateRepository productStateRepository;
+
+    public ProductState saveProductState(ProductStateDto.Request productState) {
+        ProductState build = ProductState.builder()
+                .prdState(productState.getPrdState())
+                .build();
+        return productStateRepository.save(build);
+    }
+
+    public ProductState getProductState(int psSeq) {
+        return productStateRepository.findById(psSeq)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품 상태가 없습니다."));
+    }
+
+    public List<ProductState> getAllProductState() {
+        return productStateRepository.findAll();
+    }
+}

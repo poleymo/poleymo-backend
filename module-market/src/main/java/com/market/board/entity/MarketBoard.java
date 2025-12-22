@@ -21,16 +21,18 @@ public class MarketBoard {
     private int userSeq; // 중고나라 게시글 작성자 키
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private MarketBoardState marketBoardState;
+    private MarketBoardState marketBoardState; // 중고나라 게시글 상태
 
-    private int psSeq; // 게시된 물품 상태 키 (product_state_seq)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ProductState productState; // 중고나라 게시글 물품 상태
+
     private String title; // 중고나라 게시글 제목
     private int price; // 물품 가격
 
-    @Column(name = "view_count")
+    @Column(name = "view_count") // mysql에서는 view가 이미 등록되어있으므로 view_count 사용
     private int view; // 중고나라 게시글 조회 수
 
-    @Column(name = "like_count")
+    @Column(name = "like_count") // mysql에서는 like가 이미 등록되어있으므로 like_count 사용
     private int like; // 중고나라 게시글 좋아요 횟수
     private boolean activated; // 중고나라 게시글 활성화 여부
     private int reported; // 중고나라 게시글 신고 횟수
@@ -40,5 +42,9 @@ public class MarketBoard {
 
     public int getMbsSeq() {
         return marketBoardState.getMbsSeq();
+    }
+
+    public int getPsSeq() {
+        return productState.getPsSeq();
     }
 }

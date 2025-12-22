@@ -3,6 +3,7 @@ package com.market.board.service;
 import com.market.board.dto.MarketBoardDto;
 import com.market.board.entity.MarketBoard;
 import com.market.board.entity.MarketBoardState;
+import com.market.board.entity.ProductState;
 import com.market.board.repository.MarketBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,14 +16,16 @@ public class MarketBoardService {
 
     private final MarketBoardRepository marketBoardRepository;
     private final MarketBoardStateService marketBoardStateService;
+    private final ProductStateService productStateService;
 
     public MarketBoard saveMarketBoard(MarketBoardDto.Request marketBoard) {
         MarketBoardState mbState = marketBoardStateService.getMarketBoardState(marketBoard.getMbsSeq());
+        ProductState productState = productStateService.getProductState(marketBoard.getPsSeq());
 
         MarketBoard build = MarketBoard.builder()
                 .userSeq(marketBoard.getUserSeq())
                 .marketBoardState(mbState)
-                .psSeq(marketBoard.getPsSeq())
+                .productState(productState)
                 .title(marketBoard.getTitle())
                 .price(marketBoard.getPrice())
                 .view(marketBoard.getView())
