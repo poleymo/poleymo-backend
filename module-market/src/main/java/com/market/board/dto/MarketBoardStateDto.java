@@ -1,4 +1,4 @@
-package com.market.board.service.dto;
+package com.market.board.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,8 @@
 package com.market.board.service;
 
-import com.market.board.service.dto.MarketBoardStateDto;
-import com.market.board.service.entity.MarketBoardState;
-import com.market.board.service.repository.MarketBoardStateRepository;
+import com.market.board.dto.MarketBoardStateDto;
+import com.market.board.entity.MarketBoardState;
+import com.market.board.repository.MarketBoardStateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

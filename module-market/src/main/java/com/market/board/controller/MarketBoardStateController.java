@@ -1,8 +1,8 @@
 package com.market.board.controller;
 
 import com.market.board.service.MarketBoardStateService;
-import com.market.board.service.dto.MarketBoardStateDto;
-import com.market.board.service.entity.MarketBoardState;
+import com.market.board.dto.MarketBoardStateDto;
+import com.market.board.entity.MarketBoardState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

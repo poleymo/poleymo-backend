@@ -1,4 +1,4 @@
-package com.market.board.service.entity;
+package com.market.board.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

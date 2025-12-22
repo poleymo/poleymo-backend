@@ -1,6 +1,6 @@
-package com.market.board.service.repository;
+package com.market.board.repository;
 
-import com.market.board.service.entity.MarketBoard;
+import com.market.board.entity.MarketBoard;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MarketBoardRepository extends JpaRepository<MarketBoard, Integer> {
