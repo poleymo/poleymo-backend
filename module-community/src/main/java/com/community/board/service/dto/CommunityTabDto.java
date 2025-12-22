@@ -32,20 +32,22 @@ public class CommunityTabDto {
         private Boolean visible;
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class Delete {
+
+        private Long communityTabSeq;
+        private String tabName;
+        private Boolean visible;
+    }
+
     public static CommunityTabDto.Response from(CommunityTab communityTab) {
         return CommunityTabDto.Response
                 .builder()
                 .communityTabSeq(communityTab.getCommunityTabSeq())
                 .tabName(communityTab.getTabName())
+                .visible(communityTab.getVisible())
                 .build();
-    }
-
-    @Getter
-    @Builder
-    @AllArgsConstructor
-    public static class Delete {
-        private Long communityTabSeq;
-        private String tabName;
-        private Boolean visible;
     }
 }
