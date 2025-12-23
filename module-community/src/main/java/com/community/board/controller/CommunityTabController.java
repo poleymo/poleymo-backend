@@ -1,8 +1,8 @@
 package com.community.board.controller;
 
 import com.community.board.service.CommunityTabService;
-import com.community.board.service.dto.CommunityTabDto;
-import com.community.board.service.entity.CommunityTab;
+import com.community.board.dto.CommunityTabDto;
+import com.community.board.entity.CommunityTab;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

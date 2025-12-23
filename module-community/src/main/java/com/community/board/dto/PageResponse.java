@@ -1,4 +1,4 @@
-package com.community.board.service.dto;
+package com.community.board.dto;
 
 import org.springframework.data.domain.Page;
 

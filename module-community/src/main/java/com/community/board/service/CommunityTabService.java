@@ -1,8 +1,8 @@
 package com.community.board.service;
 
-import com.community.board.service.dto.CommunityTabDto;
-import com.community.board.service.entity.CommunityTab;
-import com.community.board.service.repository.CommunityTabRepository;
+import com.community.board.dto.CommunityTabDto;
+import com.community.board.entity.CommunityTab;
+import com.community.board.repository.CommunityTabRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

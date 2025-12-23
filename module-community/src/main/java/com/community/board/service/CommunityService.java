@@ -1,9 +1,9 @@
 package com.community.board.service;
 
-import com.community.board.service.dto.CommunityDto;
-import com.community.board.service.entity.Community;
-import com.community.board.service.entity.CommunityTab;
-import com.community.board.service.repository.CommunityRepository;
+import com.community.board.dto.CommunityDto;
+import com.community.board.entity.Community;
+import com.community.board.entity.CommunityTab;
+import com.community.board.repository.CommunityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

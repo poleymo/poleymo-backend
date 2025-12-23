@@ -1,9 +1,9 @@
 package com.community.board.service;
 
-import com.community.board.service.dto.CommunityCommentDto;
-import com.community.board.service.entity.CommunityComment;
-import com.community.board.service.repository.CommunityCommentRepository;
-import com.community.board.service.repository.CommunityRepository;
+import com.community.board.dto.CommunityCommentDto;
+import com.community.board.entity.CommunityComment;
+import com.community.board.repository.CommunityCommentRepository;
+import com.community.board.repository.CommunityRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

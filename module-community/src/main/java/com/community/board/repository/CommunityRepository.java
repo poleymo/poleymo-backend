@@ -1,6 +1,6 @@
-package com.community.board.service.repository;
+package com.community.board.repository;
 
-import com.community.board.service.entity.Community;
+import com.community.board.entity.Community;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

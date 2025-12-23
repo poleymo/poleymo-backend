@@ -1,9 +1,9 @@
 package com.community.board.controller;
 
 import com.community.board.service.CommunityService;
-import com.community.board.service.dto.CommunityDto;
-import com.community.board.service.dto.PageResponse;
-import com.community.board.service.entity.Community;
+import com.community.board.dto.CommunityDto;
+import com.community.board.dto.PageResponse;
+import com.community.board.entity.Community;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

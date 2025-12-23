@@ -1,8 +1,8 @@
 package com.community.board.controller;
 
 import com.community.board.service.CommunityCommentService;
-import com.community.board.service.dto.CommunityCommentDto;
-import com.community.board.service.dto.PageResponse;
+import com.community.board.dto.CommunityCommentDto;
+import com.community.board.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

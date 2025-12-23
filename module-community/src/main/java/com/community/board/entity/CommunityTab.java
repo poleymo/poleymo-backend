@@ -1,4 +1,4 @@
-package com.community.board.service.entity;
+package com.community.board.entity;
 
 import com.community.util.BaseTimeEntity;
 import jakarta.persistence.Entity;

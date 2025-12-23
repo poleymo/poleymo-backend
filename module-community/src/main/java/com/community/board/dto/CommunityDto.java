@@ -1,6 +1,6 @@
-package com.community.board.service.dto;
+package com.community.board.dto;
 
-import com.community.board.service.entity.Community;
+import com.community.board.entity.Community;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
