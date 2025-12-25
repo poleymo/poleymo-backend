@@ -23,7 +23,7 @@ public class User {
     private Date birthday;
 
     //개인 정보
-    private String userEmil;
+    private String userEmail;
 
     private String userPhone;
 
