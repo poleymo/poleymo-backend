@@ -36,6 +36,7 @@ public class MarketBoardStateController {
         return MarketBoardStateDto.Response.builder()
                 .mbsSeq(marketBoardState.getMbsSeq())
                 .mbState(marketBoardState.getMbState())
+                .visible(marketBoardState.getVisible())
                 .build();
     }
 }

@@ -32,6 +32,7 @@ public class MarketBoardContentController {
                 .mbcSeq(marketBoardContent.getMbcSeq())
                 .mbSeq(marketBoardContent.getMbSeq())
                 .content(marketBoardContent.getContent())
+                .visible(marketBoardContent.getVisible())
                 .build();
     }
 }

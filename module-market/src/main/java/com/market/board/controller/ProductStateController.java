@@ -36,6 +36,7 @@ public class ProductStateController {
         return ProductStateDto.Response.builder()
                 .psSeq(productState.getPsSeq())
                 .prdState(productState.getPrdState())
+                .visible(productState.getVisible())
                 .build();
     }
 }

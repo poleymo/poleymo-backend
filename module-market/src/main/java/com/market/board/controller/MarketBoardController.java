@@ -40,6 +40,7 @@ public class MarketBoardController {
                 .like(marketBoard.getLike())
                 .activated(marketBoard.isActivated())
                 .reported(marketBoard.getReported())
+                .visible(marketBoard.getVisible())
                 .build();
     }
 }
