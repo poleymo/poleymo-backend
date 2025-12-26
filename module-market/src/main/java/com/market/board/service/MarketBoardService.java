@@ -39,4 +39,9 @@ public class MarketBoardService {
     public List<MarketBoard> getAllBoard() {
         return marketBoardRepository.findAll();
     }
+
+    public MarketBoard getMarketBoard(int mbSeq) {
+        return marketBoardRepository.findById(mbSeq)
+                .orElseThrow(() -> new IllegalArgumentException("헤당 게시글이 없습니다."));
+    }
 }
