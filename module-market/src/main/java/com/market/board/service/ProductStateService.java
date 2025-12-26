@@ -17,6 +17,7 @@ public class ProductStateService {
     public ProductState saveProductState(ProductStateDto.Request productState) {
         ProductState build = ProductState.builder()
                 .prdState(productState.getPrdState())
+                .visible(true)
                 .build();
         return productStateRepository.save(build);
     }

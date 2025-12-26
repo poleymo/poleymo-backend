@@ -17,6 +17,7 @@ public class MarketBoardStateService {
     public MarketBoardState saveMarketBoardState(MarketBoardStateDto.Request marketBoardState) {
         MarketBoardState build = MarketBoardState.builder()
                 .mbState(marketBoardState.getMbState())
+                .visible(true)
                 .build();
         return marketBoardStateRepository.save(build);
     }

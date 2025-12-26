@@ -32,6 +32,7 @@ public class MarketBoardService {
                 .like(marketBoard.getLike())
                 .activated(marketBoard.isActivated())
                 .reported(marketBoard.getReported())
+                .visible(true)
                 .build();
         return marketBoardRepository.save(build);
     }

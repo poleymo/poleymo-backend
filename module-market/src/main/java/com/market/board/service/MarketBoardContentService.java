@@ -21,6 +21,7 @@ public class MarketBoardContentService {
         MarketBoardContent build = MarketBoardContent.builder()
                 .marketBoard(marketBoard)
                 .content(marketBoardContent.getContent())
+                .visible(true)
                 .build();
         return marketBoardContentRepository.save(build);
     }
