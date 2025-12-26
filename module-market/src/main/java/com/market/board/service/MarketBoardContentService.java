@@ -16,7 +16,7 @@ public class MarketBoardContentService {
     private final MarketBoardContentRepository marketBoardContentRepository;
     private final MarketBoardService marketBoardService;
 
-    public MarketBoardContent saveMarketBoardContent(MarketBoardContentDto.Request marketBoardContent) {
+    public MarketBoardContent save(MarketBoardContentDto.Request marketBoardContent) {
         MarketBoard marketBoard = marketBoardService.find(marketBoardContent.getMbSeq());
         MarketBoardContent build = MarketBoardContent.builder()
                 .marketBoard(marketBoard)
@@ -26,11 +26,11 @@ public class MarketBoardContentService {
         return marketBoardContentRepository.save(build);
     }
 
-    public List<MarketBoardContent> getAllMarketBoardContent() {
+    public List<MarketBoardContent> findAll() {
         return marketBoardContentRepository.findAll();
     }
 
-    public MarketBoardContent getMarketBoardContent(int mbcSeq) {
+    public MarketBoardContent find(int mbcSeq) {
         return marketBoardContentRepository.findById(mbcSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글의 내용이 없습니다."));
     }

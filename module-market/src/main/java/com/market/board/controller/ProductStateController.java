@@ -17,26 +17,18 @@ public class ProductStateController {
 
     @PostMapping
     public ProductStateDto.Response saveProductState(@RequestBody ProductStateDto.Request productStateDto) {
-        return toResponse(productStateService.saveProductState(productStateDto));
+        return ProductStateDto.from(productStateService.save(productStateDto));
     }
 
     @GetMapping("list")
     public List<ProductStateDto.Response> getAllProductState() {
-        return productStateService.getAllProductState().stream()
-                .map(this::toResponse)
+        return productStateService.findAll().stream()
+                .map(ProductStateDto::from)
                 .toList();
     }
 
     @GetMapping
     public ProductStateDto.Response getProductState(int psSeq) {
-        return toResponse(productStateService.getProductState(psSeq));
-    }
-
-    private ProductStateDto.Response toResponse(ProductState productState) {
-        return ProductStateDto.Response.builder()
-                .psSeq(productState.getPsSeq())
-                .prdState(productState.getPrdState())
-                .visible(productState.getVisible())
-                .build();
+        return ProductStateDto.from(productStateService.find(psSeq));
     }
 }

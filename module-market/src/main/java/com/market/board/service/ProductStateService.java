@@ -14,7 +14,7 @@ public class ProductStateService {
 
     private final ProductStateRepository productStateRepository;
 
-    public ProductState saveProductState(ProductStateDto.Request productState) {
+    public ProductState save(ProductStateDto.Request productState) {
         ProductState build = ProductState.builder()
                 .prdState(productState.getPrdState())
                 .visible(true)
@@ -22,12 +22,12 @@ public class ProductStateService {
         return productStateRepository.save(build);
     }
 
-    public ProductState getProductState(int psSeq) {
+    public ProductState find(int psSeq) {
         return productStateRepository.findById(psSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 상태가 없습니다."));
     }
 
-    public List<ProductState> getAllProductState() {
+    public List<ProductState> findAll() {
         return productStateRepository.findAll();
     }
 }

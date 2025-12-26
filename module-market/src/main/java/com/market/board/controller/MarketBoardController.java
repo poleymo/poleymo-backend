@@ -22,8 +22,8 @@ public class MarketBoardController {
         return MarketBoardDto.from(marketBoardService.save(marketBoardDto));
     }
 
-    @GetMapping("list/{type}")
-    public Page<MarketBoardDto.Response> getMarketBoardList(@PathVariable int type, int page, int size) {
+    @GetMapping("list")
+    public Page<MarketBoardDto.Response> getMarketBoardList(int page, int size) {
         Page<MarketBoard> marketBoards = marketBoardService.find(page, size);
         return marketBoards.map(MarketBoardDto::from);
     }

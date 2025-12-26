@@ -1,5 +1,6 @@
 package com.market.board.dto;
 
+import com.market.board.entity.MarketBoardContent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,5 +23,14 @@ public class MarketBoardContentDto {
         private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
         private String content; // 중고나라 게시글 내용
         private Boolean visible; // 중고나라 게시글 내용 조회 가능 여부
+    }
+
+    public static MarketBoardContentDto.Response from(MarketBoardContent marketBoardContent) {
+        return MarketBoardContentDto.Response.builder()
+                .mbcSeq(marketBoardContent.getMbcSeq())
+                .mbSeq(marketBoardContent.getMbSeq())
+                .content(marketBoardContent.getContent())
+                .visible(marketBoardContent.getVisible())
+                .build();
     }
 }

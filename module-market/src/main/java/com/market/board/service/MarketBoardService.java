@@ -24,8 +24,8 @@ public class MarketBoardService {
     private final ProductStateService productStateService;
 
     public MarketBoard save(MarketBoardDto.Request marketBoard) {
-        MarketBoardState mbState = marketBoardStateService.getMarketBoardState(marketBoard.getMbsSeq());
-        ProductState productState = productStateService.getProductState(marketBoard.getPsSeq());
+        MarketBoardState mbState = marketBoardStateService.find(marketBoard.getMbsSeq());
+        ProductState productState = productStateService.find(marketBoard.getPsSeq());
 
         MarketBoard build = MarketBoard.builder()
                 .userSeq(marketBoard.getUserSeq())

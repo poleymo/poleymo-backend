@@ -17,26 +17,20 @@ public class MarketBoardStateController {
 
     @PostMapping
     public MarketBoardStateDto.Response saveMarketBoardState(@RequestBody MarketBoardStateDto.Request marketBoardStateDto) {
-        return toResponse(marketBoardStateService.saveMarketBoardState(marketBoardStateDto));
+        return MarketBoardStateDto.from(marketBoardStateService.save(marketBoardStateDto));
     }
 
     @GetMapping("list")
     public List<MarketBoardStateDto.Response> getAllMarketBoardState() {
-        return marketBoardStateService.getAllMarketBoardState().stream()
-                .map(this::toResponse)
+        return marketBoardStateService.findAll().stream()
+                .map(MarketBoardStateDto::from)
                 .toList();
     }
 
     @GetMapping
     public MarketBoardStateDto.Response getMarketBoardState(int mbsSeq) {
-        return toResponse(marketBoardStateService.getMarketBoardState(mbsSeq));
+        return MarketBoardStateDto.from(marketBoardStateService.find(mbsSeq));
     }
 
-    private MarketBoardStateDto.Response toResponse(MarketBoardState marketBoardState) {
-        return MarketBoardStateDto.Response.builder()
-                .mbsSeq(marketBoardState.getMbsSeq())
-                .mbState(marketBoardState.getMbState())
-                .visible(marketBoardState.getVisible())
-                .build();
-    }
+
 }

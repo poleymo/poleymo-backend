@@ -14,7 +14,7 @@ public class MarketBoardStateService {
 
     private final MarketBoardStateRepository marketBoardStateRepository;
 
-    public MarketBoardState saveMarketBoardState(MarketBoardStateDto.Request marketBoardState) {
+    public MarketBoardState save(MarketBoardStateDto.Request marketBoardState) {
         MarketBoardState build = MarketBoardState.builder()
                 .mbState(marketBoardState.getMbState())
                 .visible(true)
@@ -22,12 +22,12 @@ public class MarketBoardStateService {
         return marketBoardStateRepository.save(build);
     }
 
-    public MarketBoardState getMarketBoardState(int mbsSeq) {
+    public MarketBoardState find(int mbsSeq) {
         return marketBoardStateRepository.findById(mbsSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글 상태가 없습니다."));
     }
 
-    public List<MarketBoardState> getAllMarketBoardState() {
+    public List<MarketBoardState> findAll() {
         return marketBoardStateRepository.findAll();
     }
 }

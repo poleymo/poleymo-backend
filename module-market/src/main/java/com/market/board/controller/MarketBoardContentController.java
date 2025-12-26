@@ -17,22 +17,18 @@ public class MarketBoardContentController {
 
     @PostMapping
     public MarketBoardContentDto.Response saveMarketBoardContent(@RequestBody MarketBoardContentDto.Request marketBoardContentDto) {
-        return toResponse(marketBoardContentService.saveMarketBoardContent(marketBoardContentDto));
+        return MarketBoardContentDto.from(marketBoardContentService.save(marketBoardContentDto));
     }
 
-    @GetMapping
+    @GetMapping("list")
     public List<MarketBoardContentDto.Response> getAllMarketBoardContent() {
-        return marketBoardContentService.getAllMarketBoardContent().stream()
-                .map(this::toResponse)
+        return marketBoardContentService.findAll().stream()
+                .map(MarketBoardContentDto::from)
                 .toList();
     }
 
-    private MarketBoardContentDto.Response toResponse(MarketBoardContent marketBoardContent) {
-        return MarketBoardContentDto.Response.builder()
-                .mbcSeq(marketBoardContent.getMbcSeq())
-                .mbSeq(marketBoardContent.getMbSeq())
-                .content(marketBoardContent.getContent())
-                .visible(marketBoardContent.getVisible())
-                .build();
+    @GetMapping
+    public MarketBoardContentDto.Response getMarketBoardcontent(int mbcSeq) {
+        return MarketBoardContentDto.from(marketBoardContentService.find(mbcSeq));
     }
 }
