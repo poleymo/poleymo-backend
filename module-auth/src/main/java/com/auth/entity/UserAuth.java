@@ -1,9 +1,6 @@
 package com.auth.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,7 +13,9 @@ public class UserAuth {
     @Id
     @GeneratedValue
     private Long authSeq;
-    private String userId;
+    @Column(nullable = false)
+    private String userEmail;
+    @Column(nullable = false)
     private String password;
     private Boolean active;
 
