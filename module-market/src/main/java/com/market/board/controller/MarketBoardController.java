@@ -5,6 +5,7 @@ import com.market.board.service.MarketBoardService;
 import com.market.board.dto.MarketBoardDto;
 import com.market.board.entity.MarketBoard;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,29 +19,17 @@ public class MarketBoardController {
 
     @PostMapping
     public MarketBoardDto.Response saveMarketBoard(@RequestBody MarketBoardDto.Request marketBoardDto) {
-        return toResponse(marketBoardService.saveMarketBoard(marketBoardDto));
+        return MarketBoardDto.from(marketBoardService.save(marketBoardDto));
+    }
+
+    @GetMapping("list/{type}")
+    public Page<MarketBoardDto.Response> getMarketBoardList(@PathVariable int type, int page, int size) {
+        Page<MarketBoard> marketBoards = marketBoardService.find(page, size);
+        return marketBoards.map(MarketBoardDto::from);
     }
 
     @GetMapping
-    public List<MarketBoardDto.Response> getAllMarketBoard() {
-        return marketBoardService.getAllBoard().stream()
-                .map(this::toResponse)
-                .toList();
-    }
-
-    private MarketBoardDto.Response toResponse(MarketBoard marketBoard) {
-        return MarketBoardDto.Response.builder()
-                .mbSeq(marketBoard.getMbSeq())
-                .userSeq(marketBoard.getUserSeq())
-                .mbsSeq(marketBoard.getMbsSeq())
-                .psSeq(marketBoard.getPsSeq())
-                .title(marketBoard.getTitle())
-                .price(marketBoard.getPrice())
-                .view(marketBoard.getView())
-                .like(marketBoard.getLike())
-                .activated(marketBoard.isActivated())
-                .reported(marketBoard.getReported())
-                .visible(marketBoard.getVisible())
-                .build();
+    public MarketBoardDto.Response getMarketBoard(int mbSeq) {
+        return MarketBoardDto.from(marketBoardService.find(mbSeq));
     }
 }

@@ -17,7 +17,7 @@ public class MarketBoardContentService {
     private final MarketBoardService marketBoardService;
 
     public MarketBoardContent saveMarketBoardContent(MarketBoardContentDto.Request marketBoardContent) {
-        MarketBoard marketBoard = marketBoardService.getMarketBoard(marketBoardContent.getMbSeq());
+        MarketBoard marketBoard = marketBoardService.find(marketBoardContent.getMbSeq());
         MarketBoardContent build = MarketBoardContent.builder()
                 .marketBoard(marketBoard)
                 .content(marketBoardContent.getContent())

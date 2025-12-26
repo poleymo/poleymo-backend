@@ -6,6 +6,10 @@ import com.market.board.entity.MarketBoardState;
 import com.market.board.entity.ProductState;
 import com.market.board.repository.MarketBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +18,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MarketBoardService {
 
+    private static final int INIT = 0;
     private final MarketBoardRepository marketBoardRepository;
     private final MarketBoardStateService marketBoardStateService;
     private final ProductStateService productStateService;
 
-    public MarketBoard saveMarketBoard(MarketBoardDto.Request marketBoard) {
+    public MarketBoard save(MarketBoardDto.Request marketBoard) {
         MarketBoardState mbState = marketBoardStateService.getMarketBoardState(marketBoard.getMbsSeq());
         ProductState productState = productStateService.getProductState(marketBoard.getPsSeq());
 
@@ -28,20 +33,23 @@ public class MarketBoardService {
                 .productState(productState)
                 .title(marketBoard.getTitle())
                 .price(marketBoard.getPrice())
-                .view(marketBoard.getView())
-                .like(marketBoard.getLike())
-                .activated(marketBoard.isActivated())
-                .reported(marketBoard.getReported())
+                .view(INIT)
+                .like(INIT)
+                .activated(true)
+                .reported(INIT)
                 .visible(true)
                 .build();
         return marketBoardRepository.save(build);
     }
 
-    public List<MarketBoard> getAllBoard() {
-        return marketBoardRepository.findAll();
+    public Page<MarketBoard> find(int page, int size) {
+        Sort sort = Sort.by("mbSeq").descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return marketBoardRepository.findAll(pageable);
     }
 
-    public MarketBoard getMarketBoard(int mbSeq) {
+    public MarketBoard find(int mbSeq) {
         return marketBoardRepository.findById(mbSeq)
                 .orElseThrow(() -> new IllegalArgumentException("헤당 게시글이 없습니다."));
     }

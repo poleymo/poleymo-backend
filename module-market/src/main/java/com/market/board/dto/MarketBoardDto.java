@@ -1,5 +1,6 @@
 package com.market.board.dto;
 
+import com.market.board.entity.MarketBoard;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,10 +16,6 @@ public class MarketBoardDto {
         private int psSeq; // 게시된 물품 상태 키 (product_state_seq)
         private String title; // 중고나라 게시글 제목
         private int price; // 물품 가격
-        private int view; // 중고나라 게시글 조회 수
-        private int like; // 중고나라 게시글 좋아요 횟수
-        private boolean activated; // 중고나라 게시글 활성화 여부
-        private int reported; // 중고나라 게시글 신고 횟수
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
     }
 
@@ -45,4 +42,19 @@ public class MarketBoardDto {
         private Boolean visible; // 게시글 조회 가능 여부
     }
 
+    public static MarketBoardDto.Response from(MarketBoard marketBoard) {
+        return MarketBoardDto.Response.builder()
+                .mbSeq(marketBoard.getMbSeq())
+                .userSeq(marketBoard.getUserSeq())
+                .mbsSeq(marketBoard.getMbsSeq())
+                .psSeq(marketBoard.getPsSeq())
+                .title(marketBoard.getTitle())
+                .price(marketBoard.getPrice())
+                .view(marketBoard.getView())
+                .like(marketBoard.getLike())
+                .activated(marketBoard.isActivated())
+                .reported(marketBoard.getReported())
+                .visible(marketBoard.getVisible())
+                .build();
+    }
 }
