@@ -21,9 +21,11 @@ public class MarketBoard {
     private int userSeq; // 중고나라 게시글 작성자 키
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mbs_seq")
     private MarketBoardState marketBoardState; // 중고나라 게시글 상태
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ps_seq")
     private ProductState productState; // 중고나라 게시글 물품 상태
 
     private String title; // 중고나라 게시글 제목
