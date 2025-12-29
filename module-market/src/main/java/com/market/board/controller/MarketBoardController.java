@@ -32,4 +32,10 @@ public class MarketBoardController {
     public MarketBoardDto.Response getMarketBoard(int mbSeq) {
         return MarketBoardDto.from(marketBoardService.find(mbSeq));
     }
+
+    @PatchMapping
+    public MarketBoardDto.Response updateMarketBoard(@RequestBody MarketBoardDto.Update dto) {
+        MarketBoard marketBoard = marketBoardService.update(dto);
+        return MarketBoardDto.from(marketBoard);
+    }
 }

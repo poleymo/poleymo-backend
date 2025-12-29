@@ -4,6 +4,8 @@ import com.market.util.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,9 +39,38 @@ public class MarketBoard extends BaseTimeEntity {
 
     @Column(name = "like_count") // mysql에서는 like가 이미 등록되어있으므로 like_count 사용
     private int like; // 중고나라 게시글 좋아요 횟수
-    private boolean activated; // 중고나라 게시글 활성화 여부
     private int reported; // 중고나라 게시글 신고 횟수
 //    private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
 
     private boolean visible; // 중고나라 게시글 조회 가능 여부
+
+    public void changeMarketBoardState(MarketBoardState marketBoardState) {
+        if (Objects.equals(this.marketBoardState, marketBoardState))
+            return;
+        this.marketBoardState = marketBoardState;
+    }
+
+    public void changeProductState(ProductState productState) {
+        if (Objects.equals(this.productState, productState))
+            return;
+        this.productState = productState;
+    }
+
+    public void changeTitle(String title) {
+        if (Objects.equals(this.title, title))
+            return;
+        this.title = title;
+    }
+
+    public void changePrice(int price) {
+        if (Objects.equals(this.price, price))
+            return;
+        this.price = price;
+    }
+
+    public void changeVisible(boolean visible) {
+        if (Objects.equals(this.visible, visible))
+            return;
+        this.visible = visible;
+    }
 }

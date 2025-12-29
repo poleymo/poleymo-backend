@@ -19,10 +19,23 @@ public class MarketBoardDto {
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
     }
 
-    /*
-    게시글 작성자 키, 게시글 상태 키, 게시된 물품 상태 키는 각각
-    User, BoardState, ProductState로 class를 생성하고, foreign key 설정을 해야한다.
-     */
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class Update {
+        private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
+        private int userSeq; // 중고나라 게시글 작성자 키
+        private int mbsSeq; // 중고나라 게시글 상태 키 (market_board_state_sequence)
+        private int psSeq; // 중고나라 게시글 물품 상태 (product_state_sequence)
+        private String title; // 중고나라 게시글 제목
+        private int price; // 물품 가격
+//        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
+        private boolean visible; // 중고나라 게시글 조회 가능 여부
+    }
+
+    public static class Delete {
+        private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
+    }
 
     @Getter
     @Builder
@@ -36,28 +49,10 @@ public class MarketBoardDto {
         private int price; // 물품 가격
         private int view; // 중고나라 게시글 조회 수
         private int like; // 중고나라 게시글 좋아요 횟수
-        private boolean activated; // 중고나라 게시글 활성화 여부
         private int reported; // 중고나라 게시글 신고 횟수
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
         private boolean visible; // 게시글 조회 가능 여부
     }
-
-//    public static class Update {
-//        private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
-//        private int mbsSeq; // 중고나라 게시글 상태 키 (market_board_state_sequence)
-//        private int psSeq; // 중고나라 게시글 물품 상태 (product_state_sequence)
-//        private String title; // 중고나라 게시글 제목
-//        private int price; // 물품 가격
-//        private int view; // 중고나라 게시글 조회 수
-//        private int like; // 중고나라 게시글 좋아요 횟수
-//        private boolean activated; // 중고나라 게시글 활성화 여부
-//        private int reported; // 중고나라 게시글 신고 횟수
-//        private boolean visible; // 중고나라 게시글 조회 가능 여부
-//    }
-//
-//    public static class Delete {
-//
-//    }
 
     public static MarketBoardDto.Response from(MarketBoard marketBoard) {
         return Response.builder()
@@ -69,7 +64,6 @@ public class MarketBoardDto {
                 .price(marketBoard.getPrice())
                 .view(marketBoard.getView())
                 .like(marketBoard.getLike())
-                .activated(marketBoard.isActivated())
                 .reported(marketBoard.getReported())
                 .visible(marketBoard.isVisible())
                 .build();
