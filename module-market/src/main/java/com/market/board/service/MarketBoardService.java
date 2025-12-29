@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class MarketBoardService {
@@ -23,16 +21,16 @@ public class MarketBoardService {
     private final MarketBoardStateService marketBoardStateService;
     private final ProductStateService productStateService;
 
-    public MarketBoard save(MarketBoardDto.Create marketBoard) {
-        MarketBoardState mbState = marketBoardStateService.find(marketBoard.getMbsSeq());
-        ProductState productState = productStateService.find(marketBoard.getPsSeq());
+    public MarketBoard save(MarketBoardDto.Create dto) {
+        MarketBoardState mbState = marketBoardStateService.find(dto.getMbsSeq());
+        ProductState productState = productStateService.find(dto.getPsSeq());
 
         MarketBoard build = MarketBoard.builder()
-                .userSeq(marketBoard.getUserSeq())
+                .userSeq(dto.getUserSeq())
                 .marketBoardState(mbState)
                 .productState(productState)
-                .title(marketBoard.getTitle())
-                .price(marketBoard.getPrice())
+                .title(dto.getTitle())
+                .price(dto.getPrice())
                 .view(INIT)
                 .like(INIT)
                 .activated(true)
