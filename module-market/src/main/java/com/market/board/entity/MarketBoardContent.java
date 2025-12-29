@@ -20,7 +20,7 @@ public class MarketBoardContent extends BaseTimeEntity {
     private MarketBoard marketBoard; // 중고나라 게시글 키 (market_board_sequence)
 
     private String content; // 중고나라 게시글 내용
-    public Boolean visible; // 중고나라 게시글 내용 조회 가능 여부
+    public boolean visible; // 중고나라 게시글 내용 조회 가능 여부
 
     public int getMbSeq() {
         return marketBoard.getMbSeq();

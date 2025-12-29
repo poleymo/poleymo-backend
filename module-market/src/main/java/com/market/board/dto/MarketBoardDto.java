@@ -39,10 +39,23 @@ public class MarketBoardDto {
         private boolean activated; // 중고나라 게시글 활성화 여부
         private int reported; // 중고나라 게시글 신고 횟수
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
-        private Boolean visible; // 게시글 조회 가능 여부
+        private boolean visible; // 게시글 조회 가능 여부
     }
 
 //    public static class Update {
+//        private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
+//        private int mbsSeq; // 중고나라 게시글 상태 키 (market_board_state_sequence)
+//        private int psSeq; // 중고나라 게시글 물품 상태 (product_state_sequence)
+//        private String title; // 중고나라 게시글 제목
+//        private int price; // 물품 가격
+//        private int view; // 중고나라 게시글 조회 수
+//        private int like; // 중고나라 게시글 좋아요 횟수
+//        private boolean activated; // 중고나라 게시글 활성화 여부
+//        private int reported; // 중고나라 게시글 신고 횟수
+//        private boolean visible; // 중고나라 게시글 조회 가능 여부
+//    }
+//
+//    public static class Delete {
 //
 //    }
 
@@ -58,7 +71,7 @@ public class MarketBoardDto {
                 .like(marketBoard.getLike())
                 .activated(marketBoard.isActivated())
                 .reported(marketBoard.getReported())
-                .visible(marketBoard.getVisible())
+                .visible(marketBoard.isVisible())
                 .build();
     }
 }

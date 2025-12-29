@@ -22,7 +22,7 @@ public class MarketBoardContentDto {
         private int mbcSeq; // 중고나라 게시글 내용 키 (market_board_content_sequence)
         private MarketBoardDto.Response marketBoard; // 중고나라 게시글 키 (market_board_sequence)
         private String content; // 중고나라 게시글 내용
-        private Boolean visible; // 중고나라 게시글 내용 조회 가능 여부
+        private boolean visible; // 중고나라 게시글 내용 조회 가능 여부
     }
 
     public static MarketBoardContentDto.Response from(MarketBoardContent marketBoardContent) {
@@ -30,7 +30,7 @@ public class MarketBoardContentDto {
                 .mbcSeq(marketBoardContent.getMbcSeq())
                 .marketBoard(MarketBoardDto.from(marketBoardContent.getMarketBoard()))
                 .content(marketBoardContent.getContent())
-                .visible(marketBoardContent.getVisible())
+                .visible(marketBoardContent.isVisible())
                 .build();
     }
 }
