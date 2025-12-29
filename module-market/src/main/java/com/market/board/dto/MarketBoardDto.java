@@ -10,7 +10,7 @@ public class MarketBoardDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Request {
+    public static class Create {
         private int userSeq; // 중고나라 게시글 작성자 키
         private int mbsSeq; // 중고나라 게시글 상태 키 (board_state_seq)
         private int psSeq; // 게시된 물품 상태 키 (product_state_seq)
@@ -30,8 +30,8 @@ public class MarketBoardDto {
     public static class Response {
         private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
         private int userSeq; // 중고나라 게시글 작성자 키
-        private int mbsSeq; // 중고나라 게시글 상태 키 (board_state_seq)
-        private int psSeq; // 게시된 물품 상태 키 (product_state_seq)
+        private MarketBoardStateDto.Response marketBoardState; // 중고나라 게시글 상태
+        private ProductStateDto.Response productState; // 게시된 물품 상태 키
         private String title; // 중고나라 게시글 제목
         private int price; // 물품 가격
         private int view; // 중고나라 게시글 조회 수
@@ -42,12 +42,16 @@ public class MarketBoardDto {
         private Boolean visible; // 게시글 조회 가능 여부
     }
 
+//    public static class Update {
+//
+//    }
+
     public static MarketBoardDto.Response from(MarketBoard marketBoard) {
-        return MarketBoardDto.Response.builder()
+        return Response.builder()
                 .mbSeq(marketBoard.getMbSeq())
                 .userSeq(marketBoard.getUserSeq())
-                .mbsSeq(marketBoard.getMbsSeq())
-                .psSeq(marketBoard.getPsSeq())
+                .marketBoardState(MarketBoardStateDto.from(marketBoard.getMarketBoardState()))
+                .productState(ProductStateDto.from(marketBoard.getProductState()))
                 .title(marketBoard.getTitle())
                 .price(marketBoard.getPrice())
                 .view(marketBoard.getView())

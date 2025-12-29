@@ -20,15 +20,15 @@ public class MarketBoardContentDto {
     @AllArgsConstructor
     public static class Response {
         private int mbcSeq; // 중고나라 게시글 내용 키 (market_board_content_sequence)
-        private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
+        private MarketBoardDto.Response marketBoard; // 중고나라 게시글 키 (market_board_sequence)
         private String content; // 중고나라 게시글 내용
         private Boolean visible; // 중고나라 게시글 내용 조회 가능 여부
     }
 
     public static MarketBoardContentDto.Response from(MarketBoardContent marketBoardContent) {
-        return MarketBoardContentDto.Response.builder()
+        return Response.builder()
                 .mbcSeq(marketBoardContent.getMbcSeq())
-                .mbSeq(marketBoardContent.getMbSeq())
+                .marketBoard(MarketBoardDto.from(marketBoardContent.getMarketBoard()))
                 .content(marketBoardContent.getContent())
                 .visible(marketBoardContent.getVisible())
                 .build();

@@ -18,7 +18,7 @@ public class MarketBoardController {
     private final MarketBoardService marketBoardService;
 
     @PostMapping
-    public MarketBoardDto.Response saveMarketBoard(@RequestBody MarketBoardDto.Request marketBoardDto) {
+    public MarketBoardDto.Response saveMarketBoard(@RequestBody MarketBoardDto.Create marketBoardDto) {
         return MarketBoardDto.from(marketBoardService.save(marketBoardDto));
     }
 

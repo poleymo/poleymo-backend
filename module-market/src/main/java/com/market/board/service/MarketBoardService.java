@@ -23,7 +23,7 @@ public class MarketBoardService {
     private final MarketBoardStateService marketBoardStateService;
     private final ProductStateService productStateService;
 
-    public MarketBoard save(MarketBoardDto.Request marketBoard) {
+    public MarketBoard save(MarketBoardDto.Create marketBoard) {
         MarketBoardState mbState = marketBoardStateService.find(marketBoard.getMbsSeq());
         ProductState productState = productStateService.find(marketBoard.getPsSeq());
 
