@@ -2,8 +2,10 @@ package com.market.board.service;
 
 import com.market.board.dto.MarketBoardDto;
 import com.market.board.entity.MarketBoard;
+import com.market.board.entity.MarketBoardContent;
 import com.market.board.entity.MarketBoardState;
 import com.market.board.entity.ProductState;
+import com.market.board.repository.MarketBoardContentRepository;
 import com.market.board.repository.MarketBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ public class MarketBoardService {
     private final MarketBoardRepository marketBoardRepository;
     private final MarketBoardStateService marketBoardStateService;
     private final ProductStateService productStateService;
+    private final MarketBoardContentRepository marketBoardContentRepository;
 
     public MarketBoard save(MarketBoardDto.Create dto) {
         MarketBoardState mbState = marketBoardStateService.find(dto.getMbsSeq());
@@ -75,5 +80,24 @@ public class MarketBoardService {
         marketBoard.changeVisible(dto.isVisible());
         marketBoard = marketBoardRepository.save(marketBoard);
         return marketBoard;
+    }
+
+    public void delete(MarketBoardDto.Delete dto) {
+        MarketBoard marketBoard = marketBoardRepository.findById(dto.getMbSeq())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        
+        List<MarketBoardContent> marketBoardContents = marketBoardContentRepository.findAll().stream()
+                .filter(content -> content.getMbSeq() == dto.getMbSeq())
+                .toList();
+
+        // MarketBoardContent soft-delete
+        for (MarketBoardContent marketBoardContent : marketBoardContents) {
+            marketBoardContent.changeVisible(false);
+            marketBoardContentRepository.save(marketBoardContent);
+        }
+
+        // MarketBoard soft-delete
+        marketBoard.changeVisible(false);
+        marketBoardRepository.save(marketBoard);
     }
 }

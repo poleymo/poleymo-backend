@@ -6,6 +6,8 @@ import com.market.board.dto.MarketBoardDto;
 import com.market.board.entity.MarketBoard;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,5 +39,11 @@ public class MarketBoardController {
     public MarketBoardDto.Response updateMarketBoard(@RequestBody MarketBoardDto.Update dto) {
         MarketBoard marketBoard = marketBoardService.update(dto);
         return MarketBoardDto.from(marketBoard);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<HttpStatus> deleteMarketBoard(@RequestBody MarketBoardDto.Delete dto) {
+        marketBoardService.delete(dto);
+        return ResponseEntity.ok().body(HttpStatus.OK);
     }
 }

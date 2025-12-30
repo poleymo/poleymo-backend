@@ -25,4 +25,8 @@ public class MarketBoardContent extends BaseTimeEntity {
     public int getMbSeq() {
         return marketBoard.getMbSeq();
     }
+
+    public void changeVisible(boolean visible) {
+        this.visible = visible;
+    }
 }

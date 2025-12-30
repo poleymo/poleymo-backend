@@ -33,6 +33,9 @@ public class MarketBoardDto {
         private boolean visible; // 중고나라 게시글 조회 가능 여부
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
     public static class Delete {
         private int mbSeq; // 중고나라 게시글 키 (market_board_sequence)
     }
