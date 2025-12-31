@@ -21,7 +21,6 @@ class UserAuthRedisServiceTest {
                 .userEmail("user@auth.com")
                 .password("password")
                 .active(true)
-                .user(null)
                 .build();
 
         String s = userService.saveTempAuth(ua);
