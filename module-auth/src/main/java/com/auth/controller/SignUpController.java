@@ -1,6 +1,7 @@
 package com.auth.controller;
 
 import com.auth.dto.UserAuthDto;
+import com.auth.service.PasswordEncryptor;
 import com.auth.service.UserAuthRedisService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SignUpController {
     private final UserAuthRedisService userAuthRedisService;
+    private final PasswordEncryptor passwordEncryptor;
 
     @PostMapping
     public String signUp(UserAuthDto.Request dto) throws JsonProcessingException {
-        return userAuthRedisService.saveTempAuth(dto);
+        return userAuthRedisService.saveTempAuth(passwordEncryptor.encrypt(dto));
     }
 
     @GetMapping
