@@ -21,4 +21,8 @@ public class UserAuth {
 
     @ManyToOne
     private User user;
+
+    public void changeActive(boolean active) {
+        this.active = active;
+    }
 }
