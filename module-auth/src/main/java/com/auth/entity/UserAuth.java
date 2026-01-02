@@ -13,7 +13,7 @@ public class UserAuth {
     @Id
     @GeneratedValue
     private Long authSeq;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String userEmail;
     @Column(nullable = false)
     private String password;
