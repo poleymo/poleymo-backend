@@ -33,7 +33,7 @@ public class UserAuthRedisService {
 
         if (json == null) {
             // 만료되었거나 존재하지 않음
-            return null;
+            throw new IllegalArgumentException("이메일 인증 실패");
         }
         redisTemplate.delete(key);
 
