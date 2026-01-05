@@ -12,7 +12,6 @@ public class UserAuthDto {
     public static class Request {
         private String userEmail;
         private String password;
-        private Boolean active;
     }
 
     @Getter
