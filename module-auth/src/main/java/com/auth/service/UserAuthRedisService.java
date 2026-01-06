@@ -35,9 +35,11 @@ public class UserAuthRedisService {
             // 만료되었거나 존재하지 않음
             throw new IllegalArgumentException("이메일 인증 실패");
         }
-        redisTemplate.delete(key);
-
         //string으로 저장된걸 json으로 다시 읽기
         return objectMapper.readValue(json, UserAuthDto.Request.class);
+    }
+
+    public void deleteTemp(String token) {
+        redisTemplate.delete(token);
     }
 }
