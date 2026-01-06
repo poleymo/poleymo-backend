@@ -18,14 +18,13 @@ import java.io.IOException;
 import java.util.Map;
 
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
-    private final AuthenticationManager manager;
     private final JwtProvider jwtProvider;// jwt 생성 서비스
     private final ObjectMapper objectMapper;
 
     public JwtLoginFilter(AuthenticationManager manager, JwtProvider jwtProvider, ObjectMapper objectMapper) {
-        this.manager = manager;
         this.jwtProvider = jwtProvider;
         this.objectMapper = objectMapper;
+        setAuthenticationManager(manager);
         setFilterProcessesUrl("/login");//로그인시 사용할 경로
     }
 
@@ -37,7 +36,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
                     = objectMapper.readValue(request.getInputStream(), UserAuthDto.Request.class);
             UsernamePasswordAuthenticationToken token
                     = new UsernamePasswordAuthenticationToken(authRequest.getUserEmail(), authRequest.getPassword());
-            return manager.authenticate(token);
+            return getAuthenticationManager().authenticate(token);
         } catch (IOException e) {
             throw new AuthenticationServiceException("Failed to authenticate user", e);
         }
