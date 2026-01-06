@@ -1,11 +1,16 @@
 package com.auth.service;
 
+import com.auth.dto.CustomAuthDetails;
 import com.auth.dto.UserAuthDto;
 import com.auth.entity.UserAuth;
 import com.auth.repository.UserAuthRepository;
 import com.auth.service.impl.UserAuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,5 +59,20 @@ public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public void deleteAuth(UserAuthDto.Delete dto) {
         userAuthRepository.deleteById(dto.getAuthSeq());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UserAuth> userAuthO = userAuthRepository.findByUserEmail(username);
+        UserAuth userAuth = userAuthO.get();
+
+        CustomAuthDetails customAuthDetails = new CustomAuthDetails(
+                userAuth.getAuthSeq(),
+                userAuth.getUserEmail(),
+                userAuth.getPassword(),
+                "ROLE_USER"
+        );
+
+        return customAuthDetails;
     }
 }
