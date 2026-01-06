@@ -18,6 +18,7 @@ public class MailService {
 
     @Value("${front.path}")
     private String frontPath;
+    private String apiPath = "http://localhost:8080/";
 
     public void sendMail(String to, String subject, String linkUrl) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
@@ -32,7 +33,7 @@ public class MailService {
                 "box-shadow: 0 2px 8px rgba(0,0,0,0.1);'>" +
                 "<h1 style='color: #007BFF; margin-top: 0;'>이메일 제목</h1>" +
                 "<p style='font-size: 16px; color: #333333;'>내용 본문입니다.</p>" +
-                "<a href='" + frontPath + "signup?token=" + linkUrl + "'" +
+                "<a href='" + apiPath + "signup?token=" + linkUrl + "'" +
                 " style='display: inline-block; padding: 10px 20px; color: white; background-color: #28a745; " +
                 "text-decoration: none; border-radius: 5px; font-weight: bold;'>회원가입 완료하러 가기</a>" +
                 "</div>" +
