@@ -32,6 +32,7 @@ public class SignUpController {
         userAuthRedisService.getTempAuth(token);
         UserAuthDto.Request dto = userAuthRedisService.getTempAuth(token);
         UserAuth userAuth = userAuthService.saveAuth(dto);
+        userAuthRedisService.deleteTemp(token);
 
         return UserAuthDto.of(userAuth);
     }
