@@ -22,10 +22,11 @@ public class JwtProvider {
     }
 
     // 토큰 생성
-    public String createToken(Long userSeq, String role) {
+    public String createToken(Long userSeq, String user, String role) {
         return Jwts.builder()
                 .setSubject(String.valueOf(userSeq))
                 .claim("role", role)
+                .claim("username", user)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpireTime))
                 .signWith(key, SignatureAlgorithm.HS256)
