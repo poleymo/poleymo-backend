@@ -48,7 +48,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
             throws IOException, ServletException {
         CustomAuthDetails principal = (CustomAuthDetails) authResult.getPrincipal();
 
-        String at = jwtProvider.createToken(principal.getAuthSeq(), principal.getUsername());
+        String at = jwtProvider.createToken(principal.getAuthSeq(), principal.getUsername(), "ROLE_USER");
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
