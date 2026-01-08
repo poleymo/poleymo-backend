@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JwtProviderTest {
     private final JwtProvider jwtProvider = new JwtProvider("secretsecretsecretsecretsecretsecretsecretsecretsecretsecret");
-    private final String token = jwtProvider.createToken(1L, "GUEST");
+    private final String token = jwtProvider.createToken(1L, "1@2.3", "ROLE_GUEST");
     @Test
     void createToken() {
         assertNotNull(token);
