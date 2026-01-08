@@ -1,5 +1,6 @@
 package com.auth.controller;
 
+import com.auth.dto.AuthedUserDto;
 import com.auth.dto.UserAuthDto;
 import com.auth.entity.UserAuth;
 import com.auth.service.MailService;
@@ -9,6 +10,7 @@ import com.auth.service.impl.UserAuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,5 +37,10 @@ public class SignUpController {
         userAuthRedisService.deleteTemp(token);
 
         return UserAuthDto.of(userAuth);
+    }
+
+    @GetMapping("test")
+    public String test(@AuthenticationPrincipal AuthedUserDto authentication) {
+        return "OK " + authentication.getUserEmail();
     }
 }
