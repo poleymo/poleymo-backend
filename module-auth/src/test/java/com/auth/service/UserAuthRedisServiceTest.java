@@ -20,7 +20,6 @@ class UserAuthRedisServiceTest {
         UserAuthDto.Request ua = UserAuthDto.Request.builder()
                 .userEmail("user@auth.com")
                 .password("password")
-                .active(true)
                 .build();
 
         String s = userService.saveTempAuth(ua);
