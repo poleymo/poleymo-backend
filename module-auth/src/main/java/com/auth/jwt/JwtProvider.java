@@ -1,5 +1,6 @@
 package com.auth.jwt;
 
+import com.auth.dto.JwtDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -11,11 +12,14 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JwtProvider {
     private final Key key;
-    private final long accessTokenExpireTime = 1000L * 60; // 1분
+    private final long MIN = 1000L * 60; // 1분
+    private final long HOUR = 1000L * 60 * 60; // 1시간
+    private final long DAY = 86400L * 1000; // 1일
 
     public JwtProvider(@Value("${jwt.secret}") String secretKey) {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
@@ -28,7 +32,7 @@ public class JwtProvider {
                 .claim("role", role)
                 .claim("username", user)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpireTime))
+                .setExpiration(new Date(System.currentTimeMillis() + MIN * 5))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -52,4 +56,17 @@ public class JwtProvider {
         }
     }
 
+    public JwtDto.RefreshToken createRefreshToken(Long userSeq) {
+        String tokenId = UUID.randomUUID().toString();
+        String token = Jwts.builder()
+                .setSubject(String.valueOf(userSeq))
+                .claim("type", "refresh_token")
+                .claim("id", tokenId)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + DAY * 30))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+
+        return new JwtDto.RefreshToken(token, tokenId);
+    }
 }
