@@ -17,7 +17,7 @@ class JwtProviderTest {
     @Test
     void claimToken() {
         Claims claims = jwtProvider.parseClaims(token);
-        assertThat(claims.containsValue("GUEST")).isTrue();
+        assertThat(claims.containsValue("ROLE_GUEST")).isTrue();
     }
 
     @Test
