@@ -2,6 +2,7 @@ package com.auth.jwt;
 
 import com.auth.dto.CustomAuthDetails;
 import com.auth.dto.UserAuthDto;
+import com.auth.service.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,11 +19,11 @@ import java.io.IOException;
 import java.util.Map;
 
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
-    private final JwtProvider jwtProvider;// jwt 생성 서비스
+    private final JwtService jwtService;// jwt 생성 서비스
     private final ObjectMapper objectMapper;
 
-    public JwtLoginFilter(AuthenticationManager manager, JwtProvider jwtProvider, ObjectMapper objectMapper) {
-        this.jwtProvider = jwtProvider;
+    public JwtLoginFilter(AuthenticationManager manager, JwtService jwtService, ObjectMapper objectMapper) {
+        this.jwtService = jwtService;
         this.objectMapper = objectMapper;
         setAuthenticationManager(manager);
         setFilterProcessesUrl("/login");//로그인시 사용할 경로
@@ -48,16 +49,16 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
             throws IOException, ServletException {
         CustomAuthDetails principal = (CustomAuthDetails) authResult.getPrincipal();
 
-        String at = jwtProvider.createToken(principal.getAuthSeq(), principal.getUsername(), "ROLE_USER");
+        String at = jwtService.createAccessToken(principal.getAuthSeq(), principal.getUsername(), "ROLE_USER");
+        String rt = jwtService.createRefreshToken(principal.getAuthSeq());
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         response.getWriter().write(
                 new ObjectMapper().writeValueAsString(
-                        Map.of("accessToken", at)
+                        Map.of("accessToken", at, "refreshToken", rt)
                 )
         );
-
     }
 }

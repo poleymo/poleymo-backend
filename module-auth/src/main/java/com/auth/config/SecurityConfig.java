@@ -3,6 +3,7 @@ package com.auth.config;
 import com.auth.jwt.JwtAuthenticationFilter;
 import com.auth.jwt.JwtLoginFilter;
 import com.auth.jwt.JwtProvider;
+import com.auth.service.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +25,7 @@ public class SecurityConfig {
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper;
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JwtService jwtService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
@@ -31,7 +33,7 @@ public class SecurityConfig {
                 authenticationConfiguration.getAuthenticationManager();
 
         JwtLoginFilter jwtLoginFilter =
-                new JwtLoginFilter(authenticationManager, jwtProvider, objectMapper);
+                new JwtLoginFilter(authenticationManager, jwtService, objectMapper);
 
         http
                 //CSRF 보호 비활성화
