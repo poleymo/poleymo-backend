@@ -67,6 +67,6 @@ public class JwtProvider {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
-        return new JwtDto.RefreshToken(token, tokenId);
+        return new JwtDto.RefreshToken(tokenId, token);
     }
 }
