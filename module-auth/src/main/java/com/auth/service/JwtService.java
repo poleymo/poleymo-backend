@@ -16,7 +16,7 @@ public class JwtService {
 
     //RT 사용 후 삭제 용도
     public void deleteToken(String token) {
-        String tokenId = jwtProvider.parseClaims(token).get("id", String.class);
+        String tokenId = jwtProvider.parseClaims(token).get("tid", String.class);
         redisTemplate.delete(tokenId);
     }
 
@@ -38,8 +38,8 @@ public class JwtService {
 
     //리프레시 토큰 생성 및 저장
     public String createRefreshToken(Long userSeq) {
-        JwtDto.RefreshToken dto = jwtProvider.createRefreshToken(userSeq);
-        redisTemplate.opsForValue().set(dto.getId(), dto.getId(), Duration.ofDays(30));
+        JwtDto.RefreshToken dto = jwtProvider.createRefreshToken();//rt 생성
+        redisTemplate.opsForValue().set(dto.getId(), String.valueOf(userSeq), Duration.ofDays(30));//uuid -> authSeq
         return dto.getToken();
     }
 }
