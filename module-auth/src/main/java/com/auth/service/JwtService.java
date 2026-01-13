@@ -2,6 +2,7 @@ package com.auth.service;
 
 import com.auth.dto.JwtDto;
 import com.auth.jwt.JwtProvider;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,26 @@ public class JwtService {
         redisTemplate.delete(tokenId);
     }
 
-    //todo: 만료 되었는지 확인
     //요청 받은 RT가 서버에 있는지 확인
-    public String findToken(String token) {
-        String tokenId = jwtProvider.parseClaims(token).get("id", String.class);
+    //서버에 없으면 만료되었거나 공격으로 간주
+    public String findAuthSeqByRefreshTokenId(String token) {
+        Claims claims = getClaims(token);
+        String tokenId = claims.get("tid", String.class);
+
         if (tokenId == null) {
+            throw new IllegalArgumentException("Token ID not found");
+        }
+
+        String value = redisTemplate.opsForValue().get(tokenId);//사용자의 인증 정보 pk
+
+        if (value == null) {
             throw new IllegalArgumentException("Token not found");
         }
-        return redisTemplate.opsForValue().get(tokenId);
+        return value;
+    }
+
+    public Claims getClaims(String token) {
+        return jwtProvider.parseClaims(token);
     }
 
 
