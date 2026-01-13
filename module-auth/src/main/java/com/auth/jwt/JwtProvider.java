@@ -56,14 +56,14 @@ public class JwtProvider {
         }
     }
 
-    public JwtDto.RefreshToken createRefreshToken(Long userSeq) {
+    public JwtDto.RefreshToken createRefreshToken() {
         String tokenId = UUID.randomUUID().toString();
         String token = Jwts.builder()
-                .setSubject(String.valueOf(userSeq))
+                .setSubject(tokenId)
                 .claim("type", "refresh_token")
-                .claim("id", tokenId)
+                .claim("tid", tokenId)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + DAY * 30))
+                .setExpiration(new Date(System.currentTimeMillis() + DAY * 30))// 30일
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
