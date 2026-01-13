@@ -42,6 +42,12 @@ public class UserAuthServiceImpl implements UserAuthService {
     }
 
     @Override
+    public UserAuth findAuthById(Long id) {
+        return userAuthRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자를 찾을 수 없음")) ;
+    }
+
+    @Override
     public UserAuth updateAuth(UserAuthDto.Update dto) {
         UserAuth userAuth = userAuthRepository.findById(dto.getAuthSeq())
                 .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자를 찾을 수 없음"));
