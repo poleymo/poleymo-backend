@@ -15,7 +15,7 @@ public class MarketBoardContent extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int mbcSeq; // 중고나라 게시글 내용 키 (market_board_content_sequence)
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mb_seq")
     private MarketBoard marketBoard; // 중고나라 게시글 키 (market_board_sequence)
 
