@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -56,32 +57,20 @@ public class MarketBoardService {
                 .orElseThrow(() -> new IllegalArgumentException("헤당 게시글이 없습니다."));
     }
 
+    @Transactional
     public MarketBoard update(MarketBoardDto.Update dto) {
         MarketBoard marketBoard = marketBoardRepository.findById(dto.getMbSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
-
-        // 수정 로직
-        // ====MarketBoard.java 참고====
-        // mbSeq 게시글 키 marketBoard를 조회하기 위해서 필요하다.
-        // userSeq 작성자 변경 x, 하지만 작성자임을 확인할 수 있도록 dto에 담아놓는다.
-        // marketBoardState(mbsSeq) 게시글 상태 변경 o
-        // productState(psSeq) 게시글 물품 상태 변경 o
-        // title 게시글 제목 변경 o
-        // price 물품 가격 변경 o
-        // view 게시글 조회 수 변경 x -> 비정상적인 조회 수를 가진 게시글은 reported 또는 visible로 관리하도록..
-        // like 좋아요 횟수 변경 x -> 비정상적인 좋아요 횟수를 가진 게시글은 reported 또는 visible로 관리하도록..
-        // reportetd 신고 횟수 변경 x -> 비정상적인 신고 횟수를 가진 게시글은 visible로 관리하도록..
-        // visible 조회 가능 여부 변경 o
 
         marketBoard.changeMarketBoardState(marketBoardStateService.find(dto.getMbsSeq()));
         marketBoard.changeProductState(productStateService.find(dto.getPsSeq()));
         marketBoard.changeTitle(dto.getTitle());
         marketBoard.changePrice(dto.getPrice());
         marketBoard.changeVisible(dto.isVisible());
-        marketBoard = marketBoardRepository.save(marketBoard);
         return marketBoard;
     }
 
+    @Transactional
     public void delete(MarketBoardDto.Delete dto) {
         MarketBoard marketBoard = marketBoardRepository.findById(dto.getMbSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
@@ -93,11 +82,9 @@ public class MarketBoardService {
         // MarketBoardContent soft-delete
         for (MarketBoardContent marketBoardContent : marketBoardContents) {
             marketBoardContent.changeVisible(false);
-            marketBoardContentRepository.save(marketBoardContent);
         }
 
         // MarketBoard soft-delete
         marketBoard.changeVisible(false);
-        marketBoardRepository.save(marketBoard);
     }
 }
