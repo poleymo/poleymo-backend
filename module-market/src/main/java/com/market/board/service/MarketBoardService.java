@@ -38,9 +38,9 @@ public class MarketBoardService {
                 .productState(productState)
                 .title(dto.getTitle())
                 .price(dto.getPrice())
-                .view(INIT)
-                .like(INIT)
-                .reported(INIT)
+                .views(INIT)
+                .likes(INIT)
+                .reports(INIT)
                 .visible(true)
                 .pictureUrl(dto.getPictureUrl())
                 .build();

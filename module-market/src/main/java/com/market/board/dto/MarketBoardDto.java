@@ -52,9 +52,9 @@ public class MarketBoardDto {
         private ProductStateDto.Response productState; // 게시된 물품 상태 키
         private String title; // 중고나라 게시글 제목
         private Long price; // 물품 가격
-        private Long view; // 중고나라 게시글 조회 수
-        private Long like; // 중고나라 게시글 좋아요 횟수
-        private Long reported; // 중고나라 게시글 신고 횟수
+        private Long views; // 중고나라 게시글 조회 수
+        private Long likes; // 중고나라 게시글 좋아요 횟수
+        private Long reports; // 중고나라 게시글 신고 횟수
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
         private Boolean visible; // 게시글 조회 가능 여부
         private String pictureUrl; // 중고나라 게시글 사진url
@@ -68,9 +68,9 @@ public class MarketBoardDto {
                 .productState(ProductStateDto.from(marketBoard.getProductState()))
                 .title(marketBoard.getTitle())
                 .price(marketBoard.getPrice())
-                .view(marketBoard.getView())
-                .like(marketBoard.getLike())
-                .reported(marketBoard.getReported())
+                .views(marketBoard.getViews())
+                .likes(marketBoard.getLikes())
+                .reports(marketBoard.getReports())
                 .visible(marketBoard.getVisible())
                 .pictureUrl(marketBoard.getPictureUrl())
                 .build();

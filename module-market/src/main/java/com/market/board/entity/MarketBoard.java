@@ -32,12 +32,9 @@ public class MarketBoard extends BaseTimeEntity {
     private String title; // 중고나라 게시글 제목
     private Long price; // 물품 가격
 
-    @Column(name = "view_count") // mysql에서는 view가 이미 등록되어있으므로 view_count 사용
-    private Long view; // 중고나라 게시글 조회 수
-
-    @Column(name = "like_count") // mysql에서는 like가 이미 등록되어있으므로 like_count 사용
-    private Long like; // 중고나라 게시글 좋아요 횟수
-    private Long reported; // 중고나라 게시글 신고 횟수
+    private Long views; // 중고나라 게시글 조회 수
+    private Long likes; // 중고나라 게시글 좋아요 횟수
+    private Long reports; // 중고나라 게시글 신고 횟수
 //    private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
 
     private Boolean visible; // 중고나라 게시글 조회 가능 여부
