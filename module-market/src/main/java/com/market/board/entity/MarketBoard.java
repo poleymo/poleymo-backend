@@ -43,34 +43,29 @@ public class MarketBoard extends BaseTimeEntity {
 //    private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
 
     private Boolean visible; // 중고나라 게시글 조회 가능 여부
+    private String pictureUrl; // 중고나라 게시글 사진url
 
     public void changeMarketBoardState(MarketBoardState marketBoardState) {
-        if (Objects.equals(this.marketBoardState, marketBoardState))
-            return;
         this.marketBoardState = marketBoardState;
     }
 
     public void changeProductState(ProductState productState) {
-        if (Objects.equals(this.productState, productState))
-            return;
         this.productState = productState;
     }
 
     public void changeTitle(String title) {
-        if (Objects.equals(this.title, title))
-            return;
         this.title = title;
     }
 
     public void changePrice(Long price) {
-        if (Objects.equals(this.price, price))
-            return;
         this.price = price;
     }
 
     public void changeVisible(Boolean visible) {
-        if (Objects.equals(this.visible, visible))
-            return;
         this.visible = visible;
+    }
+
+    public void changePictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 }

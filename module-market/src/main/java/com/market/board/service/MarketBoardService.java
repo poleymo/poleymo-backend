@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +42,7 @@ public class MarketBoardService {
                 .like(INIT)
                 .reported(INIT)
                 .visible(true)
+                .pictureUrl(dto.getPictureUrl())
                 .build();
         return marketBoardRepository.save(build);
     }
@@ -67,6 +69,7 @@ public class MarketBoardService {
         marketBoard.changeTitle(dto.getTitle());
         marketBoard.changePrice(dto.getPrice());
         marketBoard.changeVisible(dto.getVisible());
+        marketBoard.changePictureUrl(dto.getPictureUrl());
         return marketBoard;
     }
 
@@ -76,7 +79,7 @@ public class MarketBoardService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
         
         List<MarketBoardContent> marketBoardContents = marketBoardContentRepository.findAll().stream()
-                .filter(content -> content.getMbSeq() == dto.getMbSeq())
+                .filter(content -> Objects.equals(content.getMbSeq(), dto.getMbSeq()))
                 .toList();
 
         // MarketBoardContent soft-delete

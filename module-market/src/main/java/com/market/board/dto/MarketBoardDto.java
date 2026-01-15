@@ -17,6 +17,7 @@ public class MarketBoardDto {
         private String title; // 중고나라 게시글 제목
         private Long price; // 물품 가격
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
+        private String pictureUrl; // 중고나라 게시글 사진url
     }
 
     @Getter
@@ -31,6 +32,7 @@ public class MarketBoardDto {
         private Long price; // 물품 가격
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
         private Boolean visible; // 중고나라 게시글 조회 가능 여부
+        private String pictureUrl; // 중고나라 게시글 사진url
     }
 
     @Getter
@@ -55,6 +57,7 @@ public class MarketBoardDto {
         private Long reported; // 중고나라 게시글 신고 횟수
 //        private String prdTag; // 상품 태그 (일단 구현 x) (테이블 or 컬럼, 적용 방식 논의 필요)
         private Boolean visible; // 게시글 조회 가능 여부
+        private String pictureUrl; // 중고나라 게시글 사진url
     }
 
     public static MarketBoardDto.Response from(MarketBoard marketBoard) {
@@ -69,6 +72,7 @@ public class MarketBoardDto {
                 .like(marketBoard.getLike())
                 .reported(marketBoard.getReported())
                 .visible(marketBoard.getVisible())
+                .pictureUrl(marketBoard.getPictureUrl())
                 .build();
     }
 }
