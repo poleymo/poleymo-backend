@@ -3,7 +3,7 @@ package com.market.board.service;
 import com.market.board.dto.MarketBoardDto;
 import com.market.board.entity.MarketBoard;
 import com.market.board.entity.MarketBoardContent;
-import com.market.board.entity.MarketBoardState;
+import com.market.board.entity.SaleStatus;
 import com.market.board.entity.ProductState;
 import com.market.board.repository.MarketBoardContentRepository;
 import com.market.board.repository.MarketBoardRepository;
@@ -24,17 +24,17 @@ public class MarketBoardService {
 
     private static final Long INIT = 0L;
     private final MarketBoardRepository marketBoardRepository;
-    private final MarketBoardStateService marketBoardStateService;
+    private final SaleStatusService saleStatusService;
     private final ProductStateService productStateService;
     private final MarketBoardContentRepository marketBoardContentRepository;
 
     public MarketBoard save(MarketBoardDto.Create dto) {
-        MarketBoardState mbState = marketBoardStateService.find(dto.getMbsSeq());
+        SaleStatus mbState = saleStatusService.find(dto.getSsSeq());
         ProductState productState = productStateService.find(dto.getPsSeq());
 
         MarketBoard build = MarketBoard.builder()
                 .userSeq(dto.getUserSeq())
-                .marketBoardState(mbState)
+                .saleStatus(mbState)
                 .productState(productState)
                 .title(dto.getTitle())
                 .price(dto.getPrice())
@@ -64,7 +64,7 @@ public class MarketBoardService {
         MarketBoard marketBoard = marketBoardRepository.findById(dto.getMbSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
-        marketBoard.changeMarketBoardState(marketBoardStateService.find(dto.getMbsSeq()));
+        marketBoard.changeSaleStatus(saleStatusService.find(dto.getSsSeq()));
         marketBoard.changeProductState(productStateService.find(dto.getPsSeq()));
         marketBoard.changeTitle(dto.getTitle());
         marketBoard.changePrice(dto.getPrice());

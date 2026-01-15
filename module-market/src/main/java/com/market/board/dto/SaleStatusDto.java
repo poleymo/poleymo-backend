@@ -1,11 +1,11 @@
 package com.market.board.dto;
 
-import com.market.board.entity.MarketBoardState;
+import com.market.board.entity.SaleStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-public class MarketBoardStateDto {
+public class SaleStatusDto {
 
     @Getter
     @Builder
@@ -18,16 +18,16 @@ public class MarketBoardStateDto {
     @Builder
     @AllArgsConstructor
     public static class Response {
-        private Long mbsSeq; // 중고나라 게시글 상태 키 (market_board_state_sequence)
+        private Long ssSeq; // 중고나라 게시글 상태 키 (sale_status_sequence)
         private String mbState; // 중고나라 게시글 상태 (market_board_state) (거래 대기, 거래 중, 거래 종료)
         private Boolean visible; // 중고나라 게시글 상태 조회 가능 여부
     }
 
-    public static MarketBoardStateDto.Response from(MarketBoardState marketBoardState) {
-        return MarketBoardStateDto.Response.builder()
-                .mbsSeq(marketBoardState.getMbsSeq())
-                .mbState(marketBoardState.getMbState())
-                .visible(marketBoardState.getVisible())
+    public static SaleStatusDto.Response from(SaleStatus saleStatus) {
+        return SaleStatusDto.Response.builder()
+                .ssSeq(saleStatus.getSsSeq())
+                .mbState(saleStatus.getMbState())
+                .visible(saleStatus.getVisible())
                 .build();
     }
 }

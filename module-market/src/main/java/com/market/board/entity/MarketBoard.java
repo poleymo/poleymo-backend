@@ -4,8 +4,6 @@ import com.market.util.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Objects;
-
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,8 +22,8 @@ public class MarketBoard extends BaseTimeEntity {
     private Long userSeq; // 중고나라 게시글 작성자 키
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mbs_seq")
-    private MarketBoardState marketBoardState; // 중고나라 게시글 상태
+    @JoinColumn(name = "ss_seq")
+    private SaleStatus saleStatus; // 중고나라 게시글 상태
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ps_seq")
@@ -45,8 +43,8 @@ public class MarketBoard extends BaseTimeEntity {
     private Boolean visible; // 중고나라 게시글 조회 가능 여부
     private String pictureUrl; // 중고나라 게시글 사진url
 
-    public void changeMarketBoardState(MarketBoardState marketBoardState) {
-        this.marketBoardState = marketBoardState;
+    public void changeSaleStatus(SaleStatus saleStatus) {
+        this.saleStatus = saleStatus;
     }
 
     public void changeProductState(ProductState productState) {

@@ -12,7 +12,7 @@ public class MarketBoardDto {
     @AllArgsConstructor
     public static class Create {
         private Long userSeq; // 중고나라 게시글 작성자 키
-        private Long mbsSeq; // 중고나라 게시글 상태 키 (board_state_seq)
+        private Long ssSeq; // 중고나라 게시글 상태 키 (sale_status_seq)
         private Long psSeq; // 게시된 물품 상태 키 (product_state_seq)
         private String title; // 중고나라 게시글 제목
         private Long price; // 물품 가격
@@ -26,7 +26,7 @@ public class MarketBoardDto {
     public static class Update {
         private Long mbSeq; // 중고나라 게시글 키 (market_board_sequence)
         private Long userSeq; // 중고나라 게시글 작성자 키
-        private Long mbsSeq; // 중고나라 게시글 상태 키 (market_board_state_sequence)
+        private Long ssSeq; // 중고나라 게시글 상태 키 (sale_status_seq)
         private Long psSeq; // 중고나라 게시글 물품 상태 (product_state_sequence)
         private String title; // 중고나라 게시글 제목
         private Long price; // 물품 가격
@@ -48,7 +48,7 @@ public class MarketBoardDto {
     public static class Response {
         private Long mbSeq; // 중고나라 게시글 키 (market_board_sequence)
         private Long userSeq; // 중고나라 게시글 작성자 키
-        private MarketBoardStateDto.Response marketBoardState; // 중고나라 게시글 상태
+        private SaleStatusDto.Response saleStatus; // 중고나라 게시글 상태
         private ProductStateDto.Response productState; // 게시된 물품 상태 키
         private String title; // 중고나라 게시글 제목
         private Long price; // 물품 가격
@@ -64,7 +64,7 @@ public class MarketBoardDto {
         return Response.builder()
                 .mbSeq(marketBoard.getMbSeq())
                 .userSeq(marketBoard.getUserSeq())
-                .marketBoardState(MarketBoardStateDto.from(marketBoard.getMarketBoardState()))
+                .saleStatus(SaleStatusDto.from(marketBoard.getSaleStatus()))
                 .productState(ProductStateDto.from(marketBoard.getProductState()))
                 .title(marketBoard.getTitle())
                 .price(marketBoard.getPrice())
