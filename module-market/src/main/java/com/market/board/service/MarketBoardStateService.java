@@ -22,7 +22,7 @@ public class MarketBoardStateService {
         return marketBoardStateRepository.save(build);
     }
 
-    public MarketBoardState find(int mbsSeq) {
+    public MarketBoardState find(Long mbsSeq) {
         return marketBoardStateRepository.findById(mbsSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글 상태가 없습니다."));
     }

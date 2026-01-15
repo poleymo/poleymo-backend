@@ -18,16 +18,16 @@ public class MarketBoardStateDto {
     @Builder
     @AllArgsConstructor
     public static class Response {
-        private int mbsSeq; // 중고나라 게시글 상태 키 (market_board_state_sequence)
+        private Long mbsSeq; // 중고나라 게시글 상태 키 (market_board_state_sequence)
         private String mbState; // 중고나라 게시글 상태 (market_board_state) (거래 대기, 거래 중, 거래 종료)
-        private boolean visible; // 중고나라 게시글 상태 조회 가능 여부
+        private Boolean visible; // 중고나라 게시글 상태 조회 가능 여부
     }
 
     public static MarketBoardStateDto.Response from(MarketBoardState marketBoardState) {
         return MarketBoardStateDto.Response.builder()
                 .mbsSeq(marketBoardState.getMbsSeq())
                 .mbState(marketBoardState.getMbState())
-                .visible(marketBoardState.isVisible())
+                .visible(marketBoardState.getVisible())
                 .build();
     }
 }

@@ -30,7 +30,7 @@ public class MarketBoardContentService {
         return marketBoardContentRepository.findAll();
     }
 
-    public MarketBoardContent find(int mbcSeq) {
+    public MarketBoardContent find(Long mbcSeq) {
         return marketBoardContentRepository.findById(mbcSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글의 내용이 없습니다."));
     }

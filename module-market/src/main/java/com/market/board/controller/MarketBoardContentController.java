@@ -28,7 +28,7 @@ public class MarketBoardContentController {
     }
 
     @GetMapping
-    public MarketBoardContentDto.Response getMarketBoardcontent(int mbcSeq) {
+    public MarketBoardContentDto.Response getMarketBoardcontent(Long mbcSeq) {
         return MarketBoardContentDto.from(marketBoardContentService.find(mbcSeq));
     }
 }

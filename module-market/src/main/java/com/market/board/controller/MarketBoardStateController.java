@@ -28,7 +28,7 @@ public class MarketBoardStateController {
     }
 
     @GetMapping
-    public MarketBoardStateDto.Response getMarketBoardState(int mbsSeq) {
+    public MarketBoardStateDto.Response getMarketBoardState(Long mbsSeq) {
         return MarketBoardStateDto.from(marketBoardStateService.find(mbsSeq));
     }
 

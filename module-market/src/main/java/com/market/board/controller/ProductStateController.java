@@ -28,7 +28,7 @@ public class ProductStateController {
     }
 
     @GetMapping
-    public ProductStateDto.Response getProductState(int psSeq) {
+    public ProductStateDto.Response getProductState(Long psSeq) {
         return ProductStateDto.from(productStateService.find(psSeq));
     }
 }

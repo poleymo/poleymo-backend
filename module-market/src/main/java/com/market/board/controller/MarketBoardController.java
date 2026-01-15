@@ -31,7 +31,7 @@ public class MarketBoardController {
     }
 
     @GetMapping
-    public MarketBoardDto.Response getMarketBoard(int mbSeq) {
+    public MarketBoardDto.Response getMarketBoard(Long mbSeq) {
         return MarketBoardDto.from(marketBoardService.find(mbSeq));
     }
 

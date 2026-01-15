@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MarketBoardService {
 
-    private static final int INIT = 0;
+    private static final Long INIT = 0L;
     private final MarketBoardRepository marketBoardRepository;
     private final MarketBoardStateService marketBoardStateService;
     private final ProductStateService productStateService;
@@ -52,7 +52,7 @@ public class MarketBoardService {
         return marketBoardRepository.findAll(pageable);
     }
 
-    public MarketBoard find(int mbSeq) {
+    public MarketBoard find(Long mbSeq) {
         return marketBoardRepository.findById(mbSeq)
                 .orElseThrow(() -> new IllegalArgumentException("헤당 게시글이 없습니다."));
     }
@@ -66,7 +66,7 @@ public class MarketBoardService {
         marketBoard.changeProductState(productStateService.find(dto.getPsSeq()));
         marketBoard.changeTitle(dto.getTitle());
         marketBoard.changePrice(dto.getPrice());
-        marketBoard.changeVisible(dto.isVisible());
+        marketBoard.changeVisible(dto.getVisible());
         return marketBoard;
     }
 

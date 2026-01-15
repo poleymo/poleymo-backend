@@ -22,7 +22,7 @@ public class ProductStateService {
         return productStateRepository.save(build);
     }
 
-    public ProductState find(int psSeq) {
+    public ProductState find(Long psSeq) {
         return productStateRepository.findById(psSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품 상태가 없습니다."));
     }
