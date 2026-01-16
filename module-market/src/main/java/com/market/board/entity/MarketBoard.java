@@ -21,13 +21,13 @@ public class MarketBoard extends BaseTimeEntity {
 
     private Long userSeq; // 중고나라 게시글 작성자 키
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ss_seq")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private SaleStatus saleStatus; // 중고나라 게시글 상태
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ps_seq")
-    private ProductState productState; // 중고나라 게시글 물품 상태
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ProductStatus productStatus; // 중고나라 게시글 물품 상태
 
     private String title; // 중고나라 게시글 제목
     private Long price; // 물품 가격
@@ -44,8 +44,8 @@ public class MarketBoard extends BaseTimeEntity {
         this.saleStatus = saleStatus;
     }
 
-    public void changeProductState(ProductState productState) {
-        this.productState = productState;
+    public void changeProductStatus(ProductStatus productStatus) {
+        this.productStatus = productStatus;
     }
 
     public void changeTitle(String title) {

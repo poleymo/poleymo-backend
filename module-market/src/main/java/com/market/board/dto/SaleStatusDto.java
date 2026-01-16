@@ -11,23 +11,21 @@ public class SaleStatusDto {
     @Builder
     @AllArgsConstructor
     public static class Request {
-        private String mbState; // 중고나라 게시글 상태 (market_board_state) (거래 대기, 거래 중, 거래 종료)
+        private SaleStatus saleStatus;
     }
 
     @Getter
     @Builder
     @AllArgsConstructor
     public static class Response {
-        private Long ssSeq; // 중고나라 게시글 상태 키 (sale_status_sequence)
-        private String mbState; // 중고나라 게시글 상태 (market_board_state) (거래 대기, 거래 중, 거래 종료)
-        private Boolean visible; // 중고나라 게시글 상태 조회 가능 여부
+        private SaleStatus saleStatus; // ENUM name (ON_SALE, RESERVED, ...)
+        private String description; // Description (거래 대기, 거래 중, ...)
     }
 
     public static SaleStatusDto.Response from(SaleStatus saleStatus) {
         return SaleStatusDto.Response.builder()
-                .ssSeq(saleStatus.getSsSeq())
-                .mbState(saleStatus.getMbState())
-                .visible(saleStatus.getVisible())
+                .saleStatus(saleStatus)
+                .description(saleStatus.getDescription())
                 .build();
     }
 }

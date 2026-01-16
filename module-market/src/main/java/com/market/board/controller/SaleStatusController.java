@@ -7,27 +7,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("market/board/state")
+@RequestMapping("market/board/status")
 @RestController
 @RequiredArgsConstructor
 public class SaleStatusController {
 
     private final SaleStatusService saleStatusService;
 
-    @PostMapping
-    public SaleStatusDto.Response saveSaleStatus(@RequestBody SaleStatusDto.Request saleStatusDto) {
-        return SaleStatusDto.from(saleStatusService.save(saleStatusDto));
-    }
-
     @GetMapping("list")
     public List<SaleStatusDto.Response> getAllSaleStatus() {
         return saleStatusService.findAll().stream()
                 .map(SaleStatusDto::from)
                 .toList();
-    }
-
-    @GetMapping
-    public SaleStatusDto.Response getSaleStatus(Long ssSeq) {
-        return SaleStatusDto.from(saleStatusService.find(ssSeq));
     }
 }

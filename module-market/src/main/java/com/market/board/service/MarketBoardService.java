@@ -3,8 +3,6 @@ package com.market.board.service;
 import com.market.board.dto.MarketBoardDto;
 import com.market.board.entity.MarketBoard;
 import com.market.board.entity.MarketBoardContent;
-import com.market.board.entity.SaleStatus;
-import com.market.board.entity.ProductState;
 import com.market.board.repository.MarketBoardContentRepository;
 import com.market.board.repository.MarketBoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,18 +22,20 @@ public class MarketBoardService {
 
     private static final Long INIT = 0L;
     private final MarketBoardRepository marketBoardRepository;
-    private final SaleStatusService saleStatusService;
-    private final ProductStateService productStateService;
     private final MarketBoardContentRepository marketBoardContentRepository;
 
     public MarketBoard save(MarketBoardDto.Create dto) {
-        SaleStatus mbState = saleStatusService.find(dto.getSsSeq());
-        ProductState productState = productStateService.find(dto.getPsSeq());
+        if (dto.getSaleStatus() == null) {
+            throw new IllegalArgumentException("게시글 상태는 필수 입력 항목입니다.");
+        }
+        if (dto.getProductStatus() == null) {
+            throw new IllegalArgumentException("상품 상태는 필수 입력 항목입니다.");
+        }
 
         MarketBoard build = MarketBoard.builder()
                 .userSeq(dto.getUserSeq())
-                .saleStatus(mbState)
-                .productState(productState)
+                .saleStatus(dto.getSaleStatus())
+                .productStatus(dto.getProductStatus())
                 .title(dto.getTitle())
                 .price(dto.getPrice())
                 .views(INIT)
@@ -64,8 +64,15 @@ public class MarketBoardService {
         MarketBoard marketBoard = marketBoardRepository.findById(dto.getMbSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
-        marketBoard.changeSaleStatus(saleStatusService.find(dto.getSsSeq()));
-        marketBoard.changeProductState(productStateService.find(dto.getPsSeq()));
+        if (dto.getSaleStatus() == null) {
+            throw new IllegalArgumentException("게시글 상태는 필수 입력 항목입니다.");
+        }
+        if (dto.getProductStatus() == null) {
+            throw new IllegalArgumentException("상품 상태는 필수 입력 항목입니다.");
+        }
+
+        marketBoard.changeSaleStatus(dto.getSaleStatus());
+        marketBoard.changeProductStatus(dto.getProductStatus());
         marketBoard.changeTitle(dto.getTitle());
         marketBoard.changePrice(dto.getPrice());
         marketBoard.changeVisible(dto.getVisible());
