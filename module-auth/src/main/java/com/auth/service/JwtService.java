@@ -50,9 +50,9 @@ public class JwtService {
     }
 
     //리프레시 토큰 생성 및 저장
-    public String createRefreshToken(Long userSeq) {
+    public JwtDto.RefreshToken createRefreshToken(Long userSeq) {
         JwtDto.RefreshToken dto = jwtProvider.createRefreshToken();//rt 생성
         redisTemplate.opsForValue().set(dto.getId(), String.valueOf(userSeq), Duration.ofDays(30));//uuid -> authSeq
-        return dto.getToken();
+        return dto;
     }
 }
