@@ -1,10 +1,13 @@
 package com.auth.controller;
 
 import com.auth.dto.AuthenticationDto;
+import com.auth.dto.JwtDto;
 import com.auth.entity.UserAuth;
 import com.auth.service.JwtService;
 import com.auth.service.impl.UserAuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("auth")
@@ -16,17 +19,20 @@ public class AuthController {
     private final UserAuthService userAuthService;
 
     @PostMapping("refresh")
-    public AuthenticationDto.Response refresh(@RequestBody AuthenticationDto.Request request) {
+    public ResponseEntity<AuthenticationDto.Response> refresh(@CookieValue("refresh_token") String refreshToken) {
         //토큰 조화
-        String authSeq = jwtService.findAuthSeqByRefreshTokenId(request.getRefreshToken());
+        String authSeq = jwtService.findAuthSeqByRefreshTokenId(refreshToken);
 
         //사용자 정보 조회
         UserAuth auth = userAuthService.findAuthById(Long.parseLong(authSeq));
 
         //at, rt 생성
         String at = jwtService.createAccessToken(auth.getAuthSeq(), auth.getUserEmail(), "ROLE_USER");
-        String rt = jwtService.createRefreshToken(auth.getAuthSeq());
-        jwtService.deleteToken(request.getRefreshToken());
-        return new AuthenticationDto.Response(at, rt);
+        JwtDto.RefreshToken rt = jwtService.createRefreshToken(auth.getAuthSeq());
+
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, rt.getTokenString())
+                .body(new AuthenticationDto.Response(at));
     }
 }
