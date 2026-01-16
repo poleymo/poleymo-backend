@@ -2,6 +2,7 @@ package com.auth.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseCookie;
 
 public class JwtDto {
 
@@ -9,6 +10,10 @@ public class JwtDto {
     @RequiredArgsConstructor
     public static class RefreshToken {
         private final String id;
-        private final String token;
+        private final ResponseCookie token;
+
+        public String getTokenString() {
+            return token.toString();
+        }
     }
 }
