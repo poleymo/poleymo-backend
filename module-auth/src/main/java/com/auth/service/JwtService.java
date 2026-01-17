@@ -17,7 +17,7 @@ public class JwtService {
 
     //RT 사용 후 삭제 용도
     public void deleteToken(String token) {
-        String tokenId = jwtProvider.parseClaims(token).get("tid", String.class);
+        String tokenId = jwtProvider.parseClaims(token).getSubject();
         redisTemplate.delete(tokenId);
     }
 
@@ -25,7 +25,7 @@ public class JwtService {
     //서버에 없으면 만료되었거나 공격으로 간주
     public String findAuthSeqByRefreshTokenId(String token) {
         Claims claims = getClaims(token);
-        String tokenId = claims.get("tid", String.class);
+        String tokenId = claims.getSubject();
 
         if (tokenId == null) {
             throw new IllegalArgumentException("Token ID not found");

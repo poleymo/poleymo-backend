@@ -63,7 +63,6 @@ public class JwtProvider {
         String token = Jwts.builder()
                 .setSubject(tokenId)
                 .claim("type", "refresh_token")
-                .claim("tid", tokenId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + DAY * 30))// 30일
                 .signWith(key, SignatureAlgorithm.HS256)
