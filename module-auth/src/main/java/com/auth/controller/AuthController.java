@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping("refresh")
     public ResponseEntity<AuthenticationDto.Response> refresh(@CookieValue("refresh_token") String refreshToken) {
-        //토큰 조화
+        //토큰 조회
         String authSeq = jwtService.findAuthSeqByRefreshTokenId(refreshToken);
 
         //사용자 정보 조회

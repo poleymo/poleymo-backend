@@ -36,6 +36,8 @@ public class JwtService {
         if (value == null) {
             throw new IllegalArgumentException("Token not found");
         }
+
+        deleteToken(token);
         return value;
     }
 
