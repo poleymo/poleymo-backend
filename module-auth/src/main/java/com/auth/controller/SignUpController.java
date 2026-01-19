@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("signup")
+@RequestMapping("auth/signup")
 @RequiredArgsConstructor
 public class SignUpController {
     private final UserAuthRedisService userAuthRedisService;
