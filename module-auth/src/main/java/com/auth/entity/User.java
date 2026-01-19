@@ -41,4 +41,40 @@ public class User {
     private String campus;
 
     private Boolean active;
+
+    public void changeUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void changeUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public void changeUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public void changeGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public void changeStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public void changeSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void changeCampus(String campus) {
+        this.campus = campus;
+    }
+
+    public void changeBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public void changeActive(boolean active) {
+        this.active = active;
+    }
 }
