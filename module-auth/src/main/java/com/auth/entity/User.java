@@ -27,7 +27,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String userEmail;
 
-    @Column(unique = true)
     private String userPhone;
 
     //학교 정보
