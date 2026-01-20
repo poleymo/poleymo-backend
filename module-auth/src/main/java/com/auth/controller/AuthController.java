@@ -1,13 +1,16 @@
 package com.auth.controller;
 
+import com.auth.dto.AuthedUserDto;
 import com.auth.dto.AuthenticationDto;
 import com.auth.dto.JwtDto;
+import com.auth.dto.UserAuthDto;
 import com.auth.entity.UserAuth;
 import com.auth.service.JwtService;
 import com.auth.service.impl.UserAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("auth")
@@ -34,5 +37,12 @@ public class AuthController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, rt.getTokenString())
                 .body(new AuthenticationDto.Response(at));
+    }
+
+    @PatchMapping
+    public ResponseEntity<Void> updatePassword(@AuthenticationPrincipal AuthedUserDto user,
+                                                 UserAuthDto.Update dto) {
+        userAuthService.changePassword(user, dto);
+        return ResponseEntity.noContent().build();
     }
 }
