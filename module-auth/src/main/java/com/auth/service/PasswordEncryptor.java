@@ -16,4 +16,8 @@ public class PasswordEncryptor {
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .build();
     }
+
+    public String encrypt(String password) {
+        return passwordEncoder.encode(password);
+    }
 }
