@@ -26,10 +26,11 @@ public class UserAuthDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Update {
-        private Long authSeq;
-        private String userEmail;
-        private String password;
-        private Boolean active;
+        private Long authSeq;//못바꿈
+        private String userEmail;//못바꿈
+        private String password;//바꿀 수 있음
+        private String newPassword;
+        private Boolean active;//바꿀 수 있음
     }
 
     @Getter
