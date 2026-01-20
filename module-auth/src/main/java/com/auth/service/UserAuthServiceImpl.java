@@ -1,5 +1,6 @@
 package com.auth.service;
 
+import com.auth.dto.AuthedUserDto;
 import com.auth.dto.CustomAuthDetails;
 import com.auth.dto.UserAuthDto;
 import com.auth.entity.UserAuth;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class UserAuthServiceImpl implements UserAuthService {
 
     private final UserAuthRepository userAuthRepository;
+    private final PasswordEncryptor passwordEncryptor;
 
     @Override
     public UserAuth saveAuth(UserAuthDto.Request dto) {
@@ -65,6 +68,24 @@ public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public void deleteAuth(UserAuthDto.Delete dto) {
         userAuthRepository.deleteById(dto.getAuthSeq());
+    }
+
+    @Override
+    public UserAuth changePassword(AuthedUserDto user, UserAuthDto.Update dto) {
+        UserAuth auth = findAuthById(dto.getAuthSeq());
+        String password = passwordEncryptor.encrypt(dto.getPassword());
+        String newPassword = passwordEncryptor.encrypt(dto.getNewPassword());
+
+        if (!Objects.equals(password, auth.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 다름");
+        }
+
+        //요청한 사용자 아이디와 토큰의 사용자 아이디가 다르면 예외
+        if (Objects.equals(dto.getAuthSeq(), auth.getAuthSeq())) {
+            auth.changePassword(newPassword);
+            return auth;
+        }
+        throw new IllegalArgumentException("잘못된 접근입니다.");
     }
 
     @Override
