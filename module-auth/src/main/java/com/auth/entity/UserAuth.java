@@ -25,4 +25,8 @@ public class UserAuth {
     public void changeActive(boolean active) {
         this.active = active;
     }
+
+    public void changePassword(String password) {
+        this.password = password;
+    }
 }
