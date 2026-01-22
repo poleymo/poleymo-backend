@@ -51,21 +51,6 @@ public class UserAuthServiceImpl implements UserAuthService {
     }
 
     @Override
-    public UserAuth updateAuth(UserAuthDto.Update dto) {
-        UserAuth userAuth = userAuthRepository.findById(dto.getAuthSeq())
-                .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자를 찾을 수 없음"));
-        userAuth.changeActive(false);// 기존 정보 soft delete
-
-        //새로운 인증정보 생성
-        UserAuth newAuth = UserAuth.builder()
-                .userEmail(dto.getUserEmail())
-                .password(dto.getPassword())
-                .active(true)
-                .build();
-        return userAuthRepository.save(newAuth);
-    }
-
-    @Override
     public void deleteAuth(UserAuthDto.Delete dto) {
         userAuthRepository.deleteById(dto.getAuthSeq());
     }
