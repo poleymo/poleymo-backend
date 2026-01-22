@@ -82,8 +82,14 @@ public class UserAuthServiceImpl implements UserAuthService {
 
         //요청한 사용자 아이디와 토큰의 사용자 아이디가 다르면 예외
         if (Objects.equals(dto.getAuthSeq(), auth.getAuthSeq())) {
-            auth.changePassword(newPassword);
-            return auth;
+            auth.changeActive(false);
+            UserAuth newAuth =
+                    UserAuth.builder()
+                            .userEmail(user.getUserEmail())
+                            .password(newPassword)
+                            .active(true).build();
+            userAuthRepository.save(newAuth);
+            return newAuth;
         }
         throw new IllegalArgumentException("잘못된 접근입니다.");
     }
