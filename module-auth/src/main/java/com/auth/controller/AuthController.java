@@ -39,6 +39,8 @@ public class AuthController {
                 .body(new AuthenticationDto.Response(at));
     }
 
+    //인증 pk가 바뀌었기 때문에 재로그인 되어야함
+    //프론트에서 제어하는게 적절할 듯
     @PatchMapping
     public ResponseEntity<Void> updatePassword(@AuthenticationPrincipal AuthedUserDto user,
                                                  UserAuthDto.Update dto) {
