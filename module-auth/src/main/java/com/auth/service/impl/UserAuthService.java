@@ -9,7 +9,6 @@ public interface UserAuthService extends UserDetailsService {
     UserAuth saveAuth(UserAuthDto.Request dto);
     UserAuth findAuth(UserAuthDto.Request dto);
     UserAuth findAuthById(Long id);
-    UserAuth updateAuth(UserAuthDto.Update dto);
     void deleteAuth(UserAuthDto.Delete dto);
     UserAuth changePassword(AuthedUserDto user, UserAuthDto.Update dto);
 }
