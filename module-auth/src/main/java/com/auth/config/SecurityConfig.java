@@ -4,16 +4,19 @@ import com.auth.jwt.JwtAuthenticationFilter;
 import com.auth.jwt.JwtLoginFilter;
 import com.auth.jwt.JwtProvider;
 import com.auth.service.JwtService;
+import com.auth.service.impl.UserAuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -22,6 +25,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final UserAuthService userAuthService;
+    private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper;
     private final AuthenticationConfiguration authenticationConfiguration;
@@ -63,5 +68,16 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @Bean
+    public AuthenticationManager authenticationManager(
+            HttpSecurity http
+    ) {
+        AuthenticationManagerBuilder builder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
 
+        builder
+                .userDetailsService(userAuthService)
+                .passwordEncoder(passwordEncoder);
+        return builder.build();
+    }
 }
