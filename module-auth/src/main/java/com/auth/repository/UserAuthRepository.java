@@ -12,7 +12,5 @@ public interface UserAuthRepository extends JpaRepository<UserAuth, Long> {
 
     Optional<UserAuth> findByUserEmail(String userEmail);
 
-    Optional<Object> findByIdAndActive(Long id, boolean attr0);
-
     Optional<UserAuth> findByAuthSeqAndActive(Long authSeq, boolean active);
 }

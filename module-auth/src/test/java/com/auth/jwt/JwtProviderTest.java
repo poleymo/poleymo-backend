@@ -1,6 +1,7 @@
 package com.auth.jwt;
 
 import io.jsonwebtoken.Claims;
+import jwt.JwtProvider;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

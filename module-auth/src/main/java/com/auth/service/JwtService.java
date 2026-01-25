@@ -1,8 +1,8 @@
 package com.auth.service;
 
-import com.auth.dto.JwtDto;
-import com.auth.jwt.JwtProvider;
 import io.jsonwebtoken.Claims;
+import dto.JwtDto;
+import jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
