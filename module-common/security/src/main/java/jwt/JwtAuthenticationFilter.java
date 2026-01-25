@@ -1,6 +1,6 @@
-package com.auth.jwt;
+package jwt;
 
-import com.auth.dto.AuthedUserDto;
+import dto.AuthedUserDto;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

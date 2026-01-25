@@ -1,6 +1,7 @@
-package com.auth.jwt;
+package jwt;
 
-import com.auth.dto.JwtDto;
+
+import dto.JwtDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
