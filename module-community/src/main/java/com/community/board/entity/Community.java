@@ -22,7 +22,7 @@ public class Community extends BaseTimeEntity {
 
     private Long recommend;
 
-    private String author;
+    private Long user;
 
     private Boolean visible;
 

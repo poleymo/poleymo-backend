@@ -13,7 +13,7 @@ public class CommunityDto {
     public static class Request {
         private String title;
         private String content;
-        private String author;
+        private Long user;// 사용자
         private Long communityTabSeq;
     }
 
@@ -25,7 +25,7 @@ public class CommunityDto {
         private String title;
         private String content;
         private Long recommend;
-        private String author;
+        private Long user;// 사용자
         private Boolean visible;
         private CommunityTabDto.Response communityTabSeq;
     }
@@ -62,7 +62,7 @@ public class CommunityDto {
                 .title(community.getTitle())
                 .content(community.getContent())
                 .recommend(community.getRecommend())
-                .author(community.getAuthor())
+                .user(community.getUser())
                 .visible(community.getVisible())
                 .build();
     }

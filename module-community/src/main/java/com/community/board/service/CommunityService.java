@@ -42,7 +42,7 @@ public class CommunityService {
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .recommend(INIT)
-                .author(dto.getAuthor())
+                .user(dto.getUser())
                 .visible(true)
                 .build();
         return communityRepository.save(community);
