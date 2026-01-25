@@ -33,7 +33,7 @@ public class CommunityCommentService {
             parentComment = commentRepository.findById(dto.getParentId()).orElse(null);
         }
         CommunityComment comment = CommunityComment.builder()
-                .author(dto.getAuthor())
+                .user(dto.getUser())
                 .parent(parentComment)
                 .content(dto.getContent())
                 .community(communityRepository.getReferenceById(communitySeq)) // 프록시 엔티티

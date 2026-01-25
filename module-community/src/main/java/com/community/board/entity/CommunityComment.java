@@ -14,7 +14,7 @@ public class CommunityComment extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentSeq;
 
-    private String author;
+    private Long user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private CommunityComment parent;

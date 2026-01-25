@@ -11,7 +11,7 @@ public class CommunityCommentDto {
     @Builder
     @AllArgsConstructor
     public static class Request {
-        private String author;// 사용자
+        private Long user;// 사용자
         private Long communitySeq;// 게시글 아이디
         private Long parentId; // 부모 아이디
         private String content; // 내용
@@ -21,7 +21,7 @@ public class CommunityCommentDto {
     @Builder
     @AllArgsConstructor
     public static class Response {
-        private String author;
+        private Long user;// 사용자
         private Long communitySeq;
         private Long parentSeq;
         private Long commentSeq;
@@ -58,7 +58,7 @@ public class CommunityCommentDto {
 
     public static Response from(CommunityComment comment) {
         return Response.builder()
-                .author(comment.getAuthor())
+                .user(comment.getUser())
                 .communitySeq(comment.getCommentSeq())
                 .parentSeq(comment.getParentSeq())
                 .commentSeq(comment.getCommentSeq())
