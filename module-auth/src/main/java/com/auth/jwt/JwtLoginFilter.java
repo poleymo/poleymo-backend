@@ -1,7 +1,6 @@
 package com.auth.jwt;
 
 import com.auth.dto.CustomAuthDetails;
-import com.auth.dto.JwtDto;
 import com.auth.dto.UserAuthDto;
 import com.auth.service.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +8,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import dto.JwtDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;

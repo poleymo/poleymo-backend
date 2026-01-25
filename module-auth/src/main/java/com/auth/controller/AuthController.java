@@ -2,11 +2,11 @@ package com.auth.controller;
 
 import com.auth.dto.AuthedUserDto;
 import com.auth.dto.AuthenticationDto;
-import com.auth.dto.JwtDto;
 import com.auth.dto.UserAuthDto;
 import com.auth.entity.UserAuth;
 import com.auth.service.JwtService;
 import com.auth.service.impl.UserAuthService;
+import dto.JwtDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

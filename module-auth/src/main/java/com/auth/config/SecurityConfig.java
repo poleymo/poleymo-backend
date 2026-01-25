@@ -1,11 +1,11 @@
 package com.auth.config;
 
-import com.auth.jwt.JwtAuthenticationFilter;
 import com.auth.jwt.JwtLoginFilter;
-import com.auth.jwt.JwtProvider;
 import com.auth.service.JwtService;
 import com.auth.service.impl.UserAuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jwt.JwtAuthenticationFilter;
+import jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
