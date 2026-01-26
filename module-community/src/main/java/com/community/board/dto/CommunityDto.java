@@ -38,7 +38,7 @@ public class CommunityDto {
         private String title;
         private String content;
         private Long recommend;
-        private String author;
+        private Long user;
         private Boolean visible;
         private CommunityTabDto.Response communityTabDto;
     }
@@ -51,7 +51,7 @@ public class CommunityDto {
         private String title;
         private String content;
         private Long recommend;
-        private String author;
+        private Long user;
         private Boolean visible;
     }
 
