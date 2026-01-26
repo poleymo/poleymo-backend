@@ -30,7 +30,8 @@ public class CommunityService {
         Sort sort = Sort.by("communitySeq").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Community> communities = communityRepository.findAllByCommunityTab_CommunityTabSeq(boardType, pageable);
+        Page<Community> communities = communityRepository
+                .findAllByCommunityTab_CommunityTabSeqAndVisible(boardType, true, pageable);
         return communities.map(CommunityDto::from);
     }
 
