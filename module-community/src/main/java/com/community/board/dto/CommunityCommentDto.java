@@ -34,7 +34,7 @@ public class CommunityCommentDto {
     @Builder
     @AllArgsConstructor
     public static class Update {
-        private String author;//변경 불가
+        private Long user;// 사용자
         private Long communitySeq;//변경 불가
         private Long parentSeq;//변경 불가
         private Long commentSeq;//변경 불가
@@ -47,7 +47,7 @@ public class CommunityCommentDto {
     @Builder
     @AllArgsConstructor
     public static class Delete {
-        private String author;
+        private Long user;// 사용자
         private Long communitySeq;
         private Long parentSeq;
         private Long commentSeq;
