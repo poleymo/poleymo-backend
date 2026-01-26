@@ -25,7 +25,8 @@ public class CommunityCommentService {
         Sort sort = Sort.by(Sort.Direction.DESC, "commentSeq");
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        return commentRepository.findAllByCommunity_CommunitySeq(communitySeq, pageable);
+        return commentRepository
+                .findAllByCommunity_CommunitySeqAndVisible(communitySeq, true, pageable);
     }
 
     public CommunityComment saveComment(AuthedUserDto user, Long communitySeq, CommunityCommentDto.Request dto) {
