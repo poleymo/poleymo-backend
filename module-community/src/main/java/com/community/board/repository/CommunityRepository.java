@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CommunityRepository extends JpaRepository<Community, Long> {
     Page<Community> findAllByCommunityTab_CommunityTabSeq(Long communityTabCommunityTabSeq, Pageable pageable);
+    Page<Community> findAllByCommunityTab_CommunityTabSeqAndVisible(Long communityTabCommunityTabSeq, Boolean visible, Pageable pageable);
 }
