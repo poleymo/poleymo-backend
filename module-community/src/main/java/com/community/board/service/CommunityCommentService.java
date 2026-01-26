@@ -4,6 +4,7 @@ import com.community.board.dto.CommunityCommentDto;
 import com.community.board.entity.CommunityComment;
 import com.community.board.repository.CommunityCommentRepository;
 import com.community.board.repository.CommunityRepository;
+import dto.AuthedUserDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,13 +28,13 @@ public class CommunityCommentService {
         return commentRepository.findAllByCommunity_CommunitySeq(communitySeq, pageable);
     }
 
-    public CommunityComment saveComment(Long communitySeq, CommunityCommentDto.Request dto) {
+    public CommunityComment saveComment(AuthedUserDto user, Long communitySeq, CommunityCommentDto.Request dto) {
         CommunityComment parentComment = null;
         if (dto.getParentId() != null) {
             parentComment = commentRepository.findById(dto.getParentId()).orElse(null);
         }
         CommunityComment comment = CommunityComment.builder()
-                .user(dto.getUser())
+                .user(user.getAuthSeq())
                 .parent(parentComment)
                 .content(dto.getContent())
                 .community(communityRepository.getReferenceById(communitySeq)) // 프록시 엔티티
@@ -44,7 +45,7 @@ public class CommunityCommentService {
     }
 
     @Transactional
-    public CommunityComment updateComment(Long communitySeq, CommunityCommentDto.Update dto) {
+    public CommunityComment updateComment(CommunityCommentDto.Update dto) {
         CommunityComment comment = commentRepository.findById(dto.getCommentSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 댓글"));
         comment.changeContent(dto.getContent());
