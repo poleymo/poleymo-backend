@@ -4,10 +4,14 @@ import com.community.board.service.CommunityService;
 import com.community.board.dto.CommunityDto;
 import com.community.board.dto.PageResponse;
 import com.community.board.entity.Community;
+ import dto.AuthedUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RequestMapping("community/boards")
 @RestController
@@ -28,18 +32,26 @@ public class CommunityController {
     }
 
     @PostMapping
-    public CommunityDto.Response saveCommunity(@RequestBody CommunityDto.Request dto) {
-        Community community = communityService.save(dto);
+    public CommunityDto.Response saveCommunity(@AuthenticationPrincipal AuthedUserDto user,
+                                               @RequestBody CommunityDto.Request dto) {
+        Community community = communityService.save(user, dto);
         return CommunityDto.from(community);
     }
 
     @PatchMapping
-    public CommunityDto.Response updateCommunity(@RequestBody CommunityDto.Update dto) {
+    public CommunityDto.Response updateCommunity(@AuthenticationPrincipal AuthedUserDto user, @RequestBody CommunityDto.Update dto) {
+        if (!Objects.equals(user.getAuthSeq(), dto.getUser())) {
+            throw new IllegalArgumentException("허용되지 않은 요청입니다.");
+        }
         return communityService.update(dto);
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteCommunity(@RequestBody CommunityDto.Delete dto) {
+    public ResponseEntity<HttpStatus> deleteCommunity(@AuthenticationPrincipal AuthedUserDto user, @RequestBody CommunityDto.Delete dto) {
+        if (!Objects.equals(user.getAuthSeq(), dto.getUser())) {
+            throw new IllegalArgumentException("허용되지 않은 요청입니다.");
+        }
+
         communityService.delete(dto);
         return ResponseEntity.ok().body(HttpStatus.OK);
     }

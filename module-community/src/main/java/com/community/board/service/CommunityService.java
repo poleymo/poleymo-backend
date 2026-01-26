@@ -4,6 +4,7 @@ import com.community.board.dto.CommunityDto;
 import com.community.board.entity.Community;
 import com.community.board.entity.CommunityTab;
 import com.community.board.repository.CommunityRepository;
+import dto.AuthedUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +35,7 @@ public class CommunityService {
     }
 
     @Transactional
-    public Community save(CommunityDto.Request dto) {
+    public Community save(AuthedUserDto user, CommunityDto.Request dto) {
         CommunityTab tab = communityTabService.getTab(dto.getCommunityTabSeq());
 
         Community community = Community.builder()
@@ -42,7 +43,7 @@ public class CommunityService {
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .recommend(INIT)
-                .user(dto.getUser())
+                .user(user.getAuthSeq())
                 .visible(true)
                 .build();
         return communityRepository.save(community);
